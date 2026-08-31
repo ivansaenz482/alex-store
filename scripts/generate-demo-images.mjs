@@ -17,15 +17,6 @@ const hex2rgb = (hex) => {
   ];
 };
 const rgba = (hex, a) => `rgba(${hex2rgb(hex).join(",")},${a})`;
-const mix = (a, b, t) => {
-  const [r1, g1, b1] = hex2rgb(a);
-  const [r2, g2, b2] = hex2rgb(b);
-  return `rgb(${[
-    Math.round(r1 + (r2 - r1) * t),
-    Math.round(g1 + (g2 - g1) * t),
-    Math.round(b1 + (b2 - b1) * t),
-  ].join(",")})`;
-};
 
 const stripes = (color, id) => `
   <pattern id="st${id}" width="60" height="60" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
