@@ -7,12 +7,13 @@
   --border: rgba(255, 255, 255, 0.08);
   --foreground: #f5f5f7;
 
-  --volt: #ccff00;
-  --volt-soft: #e6ff6b;
+  --volt: #39ff14;
+  --volt-soft: #86ff5e;
+  --aqua: #00ffb3;
   --magenta: #ff2e9a;
   --violet: #7c5cff;
 
-  --brand-gradient: linear-gradient(120deg, #ccff00 0%, #7c5cff 55%, #ff2e9a 100%);
+  --brand-gradient: linear-gradient(110deg, #00ff9f 0%, #39ff14 45%, #00ffb3 100%);
 }
 
 @theme inline {
@@ -24,6 +25,7 @@
 
   --color-volt: var(--volt);
   --color-volt-soft: var(--volt-soft);
+  --color-aqua: var(--aqua);
   --color-magenta: var(--magenta);
   --color-violet: var(--violet);
 

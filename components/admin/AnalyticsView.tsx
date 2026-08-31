@@ -187,7 +187,7 @@ export function AnalyticsView() {
             {data.topCategories.map((c) => (
               <div key={c.id} className="flex items-center justify-between gap-3 rounded-xl bg-white/3 px-4 py-3">
                 <p className="min-w-0 flex-1 truncate text-sm font-medium">{c.name}</p>
-                <span className="text-sm font-bold text-magenta">{fmt(c.count)}</span>
+                <span className="text-sm font-bold text-aqua">{fmt(c.count)}</span>
               </div>
             ))}
           </div>

@@ -1,0 +1,85 @@
+# ============================================================
+#  ALEX.STORE — Backup automático a GitHub Releases
+#  Cada día (05:00 UTC) y bajo demanda:
+#    1) Se conecta por SSH a la VPS y comprime `data/` + `public/uploads/`.
+#    2) Descarga el tar al runner.
+#    3) Lo publica como un Release (asset) en tu GitHub.
+#
+#  Usa los MISMOS secretos que el workflow Deploy:
+#    VPS_HOST, VPS_USER, VPS_SSH_KEY, VPS_PATH (VPS_PORT opcional)
+#
+#  Así, si tu VPS falla, puedes recuperar fotos y datos desde
+#  GitHub → Releases → "backup-AAAA-MM-DD".
+#
+#  💡 Los backups se acumulan; puedes borrar los viejos desde Releases.
+# ============================================================
+name: Backup
+
+on:
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fecha del backup
+        id: date
+        run: echo "TAG=backup-$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      - name: Crear comprimido en la VPS
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || '22' }}
+          script: |
+            set -e
+            cd ${{ secrets.VPS_PATH }}
+            mkdir -p /tmp/alexbackup
+            tar -czf /tmp/alexbackup/store.tar.gz --ignore-failed-read data public/uploads
+            ls -lh /tmp/alexbackup/store.tar.gz
+
+      - name: Guiar la clave SSH (para descargar)
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: Descargar el backup a GitHub
+        run: |
+          mkdir -p ./backup
+          scp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no \
+            "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/tmp/alexbackup/store.tar.gz" \
+            ./backup/store.tar.gz || echo "No se pudo descargar: ¿existe data/uploads?"
+
+      - name: Publicar Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -f ./backup/store.tar.gz ]; then
+            gh release create "${{ steps.date.outputs.TAG }}" \
+              ./backup/store.tar.gz \
+              --title "Backup ${{ steps.date.outputs.TAG }}" \
+              --notes "Copia de seguridad de data/ y public/uploads/." \
+              --clobber || true
+            echo "✓ Backup publicado: ${{ steps.date.outputs.TAG }}"
+          else
+            echo "Sin archivo para subir."
+          fi
+
+      - name: Limpiar temporal de la VPS
+        uses: appleboy/ssh-action@v1.2.0
+        if: always()
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || '22' }}
+          script: rm -rf /tmp/alexbackup || true

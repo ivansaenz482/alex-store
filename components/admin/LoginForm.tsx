@@ -33,7 +33,7 @@ export default function AdminLogin() {
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4">
       <div className="grid-bg pointer-events-none absolute inset-0 opacity-70" />
       <div className="pointer-events-none absolute left-1/3 top-1/3 h-96 w-96 rounded-full bg-volt/15 blur-[130px]" />
-      <div className="pointer-events-none absolute bottom-10 right-10 h-96 w-96 rounded-full bg-magenta/20 blur-[130px]" />
+      <div className="pointer-events-none absolute bottom-10 right-10 h-96 w-96 rounded-full bg-aqua/20 blur-[130px]" />
 
       <motion.form
         onSubmit={handleSubmit}

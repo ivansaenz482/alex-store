@@ -19,7 +19,7 @@ const empty: Category = {
   name: "",
   emoji: "🛍️",
   image: "",
-  accent: "#ccff00",
+  accent: "#39ff14",
   description: "",
 };
 

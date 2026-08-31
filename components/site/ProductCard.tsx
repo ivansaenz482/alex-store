@@ -44,7 +44,7 @@ export function ProductCard({
             <Badge className="bg-volt text-background border-volt">{product.badge}</Badge>
           )}
           {discount > 0 && (
-            <Badge className="bg-magenta text-white border-magenta">-{discount}%</Badge>
+            <Badge className="bg-volt text-background border-volt">-{discount}%</Badge>
           )}
         </div>
         {!product.inStock && (
@@ -70,7 +70,7 @@ export function ProductCard({
               </span>
             )}
           </div>
-          <Heart className="text-white/30 transition-colors group-hover:text-magenta" size={18} />
+          <Heart className="text-white/30 transition-colors group-hover:text-volt" size={18} />
         </div>
       </div>
     </motion.div>

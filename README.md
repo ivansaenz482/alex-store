@@ -116,6 +116,21 @@ Cada `git push` a `main` **construye la imagen, la publica en GitHub Container R
 > La primera vez configura la VPS a mano (sección de arriba). Después, cada push redepliega solo.
 > El primer push de GitHub Actions puede pedir que **actives los Actions** en la pestaña *Actions* del repo.
 
+## 💾 Backup automático (GitHub Releases)
+
+`.github/workflows/backup.yml` hace una copia de seguridad **cada día a las 05:00 UTC** (y puedes forzarla en Actions → *Backup* → *Run workflow*). Comprime `data/` (productos y estadísticas) y `public/uploads/` (fotos) y guarda el `.tar.gz` como un **Release** en tu repo.
+
+- Usa los **mismos secretos** del despliegue (`VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, `VPS_PATH`).
+- Para recuperar tras un fallo: descarga el Release `backup-AAAA-MM-DD` y `tar -xzf` dentro de la ruta del proyecto en la VPS.
+
+```bash
+tar -xzf backup-2026-08-31.tar.gz
+```
+
+> Los releases se acumulan; elimina los antiguos desde GitHub → Releases para no llenar espacio.
+
+
+
 
 
 ## 🖼️ Imágenes de ejemplo
@@ -137,4 +152,4 @@ node scripts/generate-demo-images.mjs
 
 ## 🛠️ Personalización visual
 
-Colores y marca en `app/globals.css` (paleta `--volt`, `--magenta`, `--violet`). Tipografía en `app/layout.tsx`.
+Colores y marca en `app/globals.css` (paleta **negro + verde fosforescente**: `--volt` `#39ff14`, `--aqua` `#00ffb3`). Tipografía en `app/layout.tsx`.

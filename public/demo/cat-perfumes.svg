@@ -5,18 +5,18 @@
       <stop offset="1" stop-color="#16161f"/>
     </linearGradient>
     <radialGradient id="glowc" cx="0.5" cy="0.5" r="0.55">
-      <stop offset="0" stop-color="rgba(255,46,154,0.5)"/>
-      <stop offset="1" stop-color="rgba(255,46,154,0)"/>
+      <stop offset="0" stop-color="rgba(0,255,179,0.5)"/>
+      <stop offset="1" stop-color="rgba(0,255,179,0)"/>
     </radialGradient>
     <linearGradient id="bandc" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="rgba(255,46,154,0)"/>
-      <stop offset="0.5" stop-color="rgba(255,46,154,0.9)"/>
-      <stop offset="1" stop-color="rgba(255,46,154,0)"/>
+      <stop offset="0" stop-color="rgba(0,255,179,0)"/>
+      <stop offset="0.5" stop-color="rgba(0,255,179,0.9)"/>
+      <stop offset="1" stop-color="rgba(0,255,179,0)"/>
     </linearGradient>
     
   <pattern id="stcat-perfumes.svg" width="60" height="60" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
     <rect width="60" height="60" fill="none"/>
-    <rect width="14" height="60" fill="rgba(255,46,154,0.09)"/>
+    <rect width="14" height="60" fill="rgba(0,255,179,0.09)"/>
   </pattern>
   </defs>
   <rect width="1200" height="900" fill="url(#bgc)"/>

@@ -19,7 +19,7 @@ const empty: Promotion = {
   title: "",
   description: "",
   emoji: "🎁",
-  color: "#ccff00",
+  color: "#39ff14",
   discount: undefined,
   badge: "",
   categoryId: "todos",
