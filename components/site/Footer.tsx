@@ -44,9 +44,8 @@ export function Footer({ data }: { data: StoreData }) {
 
         <div className="grid grid-cols-1 gap-10 border-t border-white/8 pt-12 md:grid-cols-3">
           <div>
-            <div className="flex items-center gap-1.5 text-xl font-extrabold">
-              <span className="text-volt">A</span>
-              <span className="brand-text">LEX.STORE</span>
+            <div className="flex items-center text-xl font-extrabold">
+              <span className="text-volt">A</span><span className="brand-text">LEX.STORE</span>
             </div>
             <p className="mt-3 max-w-xs text-sm text-white/55">{store.description}</p>
             <div className="mt-5 flex gap-3">

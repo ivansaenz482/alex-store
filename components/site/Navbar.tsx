@@ -30,9 +30,8 @@ export function Navbar({
       )}
       <div className="glass border-b border-white/8">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
-          <a href="#inicio" className="flex items-center gap-1.5 text-xl font-extrabold">
-            <span className="text-volt">A</span>
-            <span className="brand-text">LEX.STORE</span>
+          <a href="#inicio" className="flex items-center text-xl font-extrabold">
+            <span className="text-volt">A</span><span className="brand-text">LEX.STORE</span>
           </a>
 
           <nav className="hidden items-center gap-8 md:flex">

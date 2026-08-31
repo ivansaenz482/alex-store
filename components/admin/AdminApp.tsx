@@ -92,9 +92,8 @@ export function AdminApp() {
     <div className="min-h-screen bg-background">
       <header className="glass sticky top-0 z-30 border-b border-white/8">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-          <div className="flex items-center gap-1.5 text-lg font-extrabold">
-            <span className="text-volt">A</span>
-            <span className="brand-text">LEX.STORE</span>
+          <div className="flex items-center text-lg font-extrabold">
+            <span className="text-volt">A</span><span className="brand-text">LEX.STORE</span>
             <span className="ml-2 rounded-full border border-white/12 bg-white/5 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-white/50">
               Admin
             </span>
