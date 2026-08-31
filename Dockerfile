@@ -7,7 +7,8 @@
 # ---- Etapa 1: construir la app ----
 FROM node:22-alpine AS builder
 WORKDIR /app
-ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_TELEMETRY_DISABLED=1 \
+    NEXT_OUTPUT_STANDALONE=true
 
 COPY package.json package-lock.json ./
 RUN npm ci
