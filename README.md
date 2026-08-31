@@ -25,6 +25,8 @@ Entra en **`http://localhost:3000/admin`** y usa la contraseña definida en `.en
 Desde ahí puedes:
 - ➕ Crear/editar/eliminar **productos** y subir varias **fotos** (carrusel de ángulos).
 - 🗂️ Editar **categorías** y sus colores/portadas.
+- 🎁 Diseñar **promociones** y ver **estadísticas** de visitas/productos más vistos.
+- 💾 Descargar o **restaurar un backup** (archivo `.tar.gz`) sin salir del panel.
 - ⚙️ Cambiar nombre, eslogan, anuncio, redes y el **número de WhatsApp**.
 
 > ⚠️ Cambia `ADMIN_PASSWORD` en `.env.local` antes de publicar.

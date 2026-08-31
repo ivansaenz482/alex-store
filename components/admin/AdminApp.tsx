@@ -11,6 +11,7 @@ import {
   Save,
   Megaphone,
   BarChart3,
+  DatabaseBackup,
 } from "lucide-react";
 import type { StoreData } from "@/lib/types";
 import { ProductEditor } from "./ProductEditor";
@@ -18,9 +19,16 @@ import { CategoryEditor } from "./CategoryEditor";
 import { SettingsEditor } from "./SettingsEditor";
 import { PromotionsEditor } from "./PromotionsEditor";
 import { AnalyticsView } from "./AnalyticsView";
+import { BackupPanel } from "./BackupPanel";
 import { cn } from "@/lib/utils";
 
-type Tab = "productos" | "categorias" | "promociones" | "estadisticas" | "ajustes";
+type Tab =
+  | "productos"
+  | "categorias"
+  | "promociones"
+  | "estadisticas"
+  | "backup"
+  | "ajustes";
 
 export function AdminApp() {
   const router = useRouter();
@@ -76,6 +84,7 @@ export function AdminApp() {
     { id: "categorias", label: "Categorías", icon: FolderTree },
     { id: "promociones", label: "Promociones", icon: Megaphone },
     { id: "estadisticas", label: "Estadísticas", icon: BarChart3 },
+    { id: "backup", label: "Backup", icon: DatabaseBackup },
     { id: "ajustes", label: "Ajustes", icon: Settings },
   ];
 
@@ -167,6 +176,7 @@ export function AdminApp() {
           />
         )}
         {tab === "estadisticas" && <AnalyticsView />}
+        {tab === "backup" && <BackupPanel />}
         {tab === "ajustes" && <SettingsEditor data={data} onChange={onChange} />}
       </main>
     </div>
