@@ -2,6 +2,7 @@ import { type NextRequest } from "next/server";
 import { promises as fs } from "fs";
 import path from "path";
 import { validateToken, COOKIE_NAME } from "@/lib/auth";
+import { supabase, isSupabaseConfigured } from "@/lib/db";
 
 const MAX_SIZE = 8 * 1024 * 1024; // 8MB
 
@@ -41,7 +42,6 @@ export async function POST(request: NextRequest) {
       { status: 415 }
     );
   }
-
   if (file.size > MAX_SIZE) {
     return Response.json({ error: "La imagen supera 8MB" }, { status: 413 });
   }
@@ -51,9 +51,21 @@ export async function POST(request: NextRequest) {
     .toString(36)
     .slice(2, 8)}-${sanitize(file.name.replace(/\.\w+$/, ""))}${ext}`;
 
+  // ── Nube (Supabase Storage) para hosting sin disco escribible (Vercel) ──
+  if (isSupabaseConfigured) {
+    const { error: upErr } = await supabase().storage
+      .from("uploads")
+      .upload(name, buffer, { contentType: file.type, upsert: true });
+    if (upErr) {
+      return Response.json({ error: "No se pudo subir: " + upErr.message }, { status: 500 });
+    }
+    const { data } = supabase().storage.from("uploads").getPublicUrl(name);
+    return Response.json({ url: data.publicUrl });
+  }
+
+  // ── Local (desarrollo / VPS con disco) ──
   const uploadsDir = path.join(process.cwd(), "public", "uploads");
   await fs.mkdir(uploadsDir, { recursive: true });
   await fs.writeFile(path.join(uploadsDir, name), buffer);
-
   return Response.json({ url: `/uploads/${name}` });
 }

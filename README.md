@@ -152,6 +152,32 @@ node scripts/generate-demo-images.mjs
 - `public/uploads/` — imágenes subidas desde el admin (persisten en el volumen Docker).
 - `public/demo/` — imágenes de ejemplo incluidas en el repo.
 
+## ☁️ Modo nube (Supabase) — para que el admin guarde en Vercel
+
+En hosting con **disco de solo lectura** (Vercel, etc.) el panel no puede guardar en archivos. Para que **suba fotos y edite de verdad**, la app usa **Supabase** automáticamente si configuras estas variables en Vercel (Settings → Environment Variables) y en `.env.local`:
+
+```env
+SUPABASE_URL=<project url>
+SUPABASE_SERVICE_ROLE_KEY=<service role key>
+```
+
+En Supabase (dashboard → SQL Editor) crea las tablas:
+
+```sql
+create table if not exists app_state (
+  id integer primary key,
+  data jsonb not null
+);
+create table if not exists analytics_state (
+  id integer primary key,
+  data jsonb not null
+);
+```
+
+Y en **Storage → New bucket** crea uno llamado `uploads` y actívalo como **público**.
+
+> Si NO configuras Supabase, la app usa archivos locales (funciona en local y VPS).
+
 ## 🛠️ Personalización visual
 
 Colores y marca en `app/globals.css` (paleta **negro + verde fosforescente**: `--volt` `#39ff14`, `--aqua` `#00ffb3`). Tipografía en `app/layout.tsx`.
