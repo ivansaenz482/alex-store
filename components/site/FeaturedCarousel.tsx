@@ -66,17 +66,17 @@ export function FeaturedCarousel({
             return (
               <div
                 key={p.id}
-                className="embla__slide mr-5 flex-[0_0_85%] sm:flex-[0_0_46%] lg:flex-[0_0_31.5%]"
+                className="embla__slide mr-4 flex-[0_0_60%] sm:flex-[0_0_42%] lg:flex-[0_0_30%]"
               >
                 <div
-                  className="group relative cursor-pointer overflow-hidden rounded-3xl border border-white/8 bg-surface p-3 transition-all hover:border-white/20"
+                  className="group relative cursor-pointer overflow-hidden rounded-3xl border border-white/8 bg-surface p-2.5 transition-all hover:border-white/20"
                   onClick={() => onView(p)}
                 >
                   <ProductImageCarousel
                     images={p.images}
                     alt={p.name}
                     emoji={cat?.emoji ?? "🛍️"}
-                    aspect="aspect-[4/5]"
+                    aspect="aspect-square"
                   />
                   <div className="p-4">
                     <div className="flex items-start justify-between gap-3">
