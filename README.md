@@ -94,6 +94,30 @@ sudo docker compose exec nginx nginx -s reload
 
 > 📌 Si quieres probar solo el frontend sin VPS, puedes usar **Vercel**, pero ahí las fotos del admin y las estadísticas **no persisten** (sistema de archivos de solo lectura).
 
+## 🔁 Despliegue automático con GitHub Actions (CI/CD)
+
+Cada `git push` a `main` **construye la imagen, la publica en GitHub Container Registry (GHCR) y redepliega en tu VPS automáticamente** (sin pasos manuales ni construir en el servidor).
+
+**Cómo funciona** (`.github/workflows/deploy.yml`):
+1. Build de la imagen Docker en GitHub.
+2. Push a `ghcr.io/ivansaenz482/alex-store:latest`.
+3. SSH a la VPS → `git pull` + `docker compose pull` + `docker compose up -d` (conserva fotos y estadísticas en los volúmenes).
+
+**Secretos que debes configurar** en GitHub → Settings → Secrets and variables → Actions:
+
+| Secreto        | Ejemplo                          | Descripción                          |
+| -------------- | -------------------------------- | ------------------------------------ |
+| `VPS_HOST`     | `203.0.113.10`                   | IP o dominio de tu VPS               |
+| `VPS_USER`     | `deploy`                         | Usuario con permiso de Docker        |
+| `VPS_SSH_KEY`  | `-----BEGIN OPENSSH...`          | Clave privada SSH (una sola línea)   |
+| `VPS_PATH`     | `/home/deploy/alex-store`        | Ruta del proyecto en la VPS          |
+| `VPS_PORT`     | `22` (opcional)                  | Puerto SSH                           |
+
+> La primera vez configura la VPS a mano (sección de arriba). Después, cada push redepliega solo.
+> El primer push de GitHub Actions puede pedir que **actives los Actions** en la pestaña *Actions* del repo.
+
+
+
 ## 🖼️ Imágenes de ejemplo
 
 La tienda arranca con imágenes de marca (SVG) generadas automáticamente para que se vea completa. Son **ejemplos**; reemplázalas desde el panel Admin subiendo tus fotos reales.

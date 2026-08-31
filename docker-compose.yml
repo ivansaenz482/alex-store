@@ -14,6 +14,8 @@
 
 services:
   app:
+    # Imagen precompilada (CI/CD) — por defecto se publica en GHCR y la VPS la descarga.
+    image: ${APP_IMAGE:-ghcr.io/ivansaenz482/alex-store:latest}
     build: .
     restart: unless-stopped
     environment:
@@ -39,7 +41,6 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
       - ./nginx/certbot/conf:/etc/letsencrypt
       - ./nginx/certbot/www:/var/www/certbot
-    command: '/bin/sh -c '"'"'while :; do sleep 6h & wait $${!}; nginx -s reload; done & exec nginx -g "daemon off;"'"'"''
 
   certbot:
     image: certbot/certbot
@@ -47,8 +48,14 @@ services:
     volumes:
       - ./nginx/certbot/conf:/etc/letsencrypt
       - ./nginx/certbot/www:/var/www/certbot
-    entrypoint: /bin/sh
-    command: '-c "trap exit TERM; while :; do certbot renew --webroot -w /var/www/certbot --quiet; sleep 12h & wait $${!}; done"'
+    entrypoint: sh
+    command: |
+      trap exit TERM
+      while :; do
+        certbot renew --webroot -w /var/www/certbot --quiet
+        sleep 12h &
+        wait $$!
+      done
 
 volumes:
   store_data:

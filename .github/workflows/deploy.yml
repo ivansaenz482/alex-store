@@ -1,0 +1,93 @@
+# ============================================================
+#  ALEX.STORE — CI/CD con GitHub Actions
+#  En cada push a `main`:
+#    1) Construye la imagen Docker (Dockerfile) en GitHub.
+#    2) La publica en GitHub Container Registry (GHCR).
+#    3) Se conecta por SSH a tu VPS y la despliega con
+#       `docker compose pull + up`, conservando fotos y
+#       estadísticas (volúmenes) sin tocar nada.
+#
+#  Secretos REQUERIDOS en el repo (Settings → Secrets → Actions):
+#    VPS_HOST       → IP o dominio de tu VPS    (ej. 203.0.113.10)
+#    VPS_USER       → usuario con Docker (sin sudo)  (ej. deploy)
+#    VPS_SSH_KEY    → clave privada SSH en una sola línea (begin/end)
+#    VPS_PATH       → ruta del proyecto en la VPS (ej. /home/deploy/alex-store)
+#    VPS_PORT       → puerto SSH (opcional, por defecto 22)
+#
+#  IMPORTANTE: la primera vez configura la VPS a mano (ver README).
+#  Luego, cada push redepliega automáticamente.
+# ============================================================
+name: Deploy a VPS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Configurar Buildx (Docker)
+        uses: docker/setup-buildx-action@v3
+
+      - name: Conectar a GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Construir y publicar imagen
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/ivansaenz482/alex-store:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Hacer pública la imagen (para que la VPS la descargue sin credenciales)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api --method PUT /user/packages/container/alex-store/visibility \
+            -f visibility=public || echo "Aviso: no se pudo marcar como público (hazlo en GitHub → Packages)."
+
+      - name: Desplegar en la VPS
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || '22' }}
+          script: |
+            set -e
+            cd ${{ secrets.VPS_PATH }}
+
+            echo "→ Actualizando código (compose y nginx)..."
+            git pull --ff-only origin main
+
+            echo "→ Descargando la nueva imagen..."
+            docker compose pull app
+
+            echo "→ Levantando la tienda..."
+            docker compose up -d --no-deps app
+
+            echo "→ Asegurando servicios y recargando Nginx..."
+            docker compose up -d
+            docker compose exec nginx nginx -s reload || true
+
+            echo "→ Verificando..."
+            CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/ || true)
+            echo "✓ Despliegue listo (HTTP $CODE)."
