@@ -12,11 +12,12 @@
     "number": "+521234567890",
     "message": "Hola ALEX.STORE 👋, quiero más información sobre sus productos."
   },
-  "categories": [    {
+  "categories": [
+    {
       "id": "camisas-futbol",
       "name": "Camisas de Fútbol",
       "emoji": "⚽",
-      "image": "",
+      "image": "/demo/cat-camisas-futbol.svg",
       "accent": "#ccff00",
       "description": "Camisas de clubes y selecciones, con versiones jugador y de fan."
     },
@@ -24,7 +25,7 @@
       "id": "perfumes",
       "name": "Perfumes",
       "emoji": "🧴",
-      "image": "",
+      "image": "/demo/cat-perfumes.svg",
       "accent": "#ff2e9a",
       "description": "Fragancias y perfumería de lujo para hacerte notar."
     },
@@ -32,7 +33,7 @@
       "id": "accesorios",
       "name": "Accesorios",
       "emoji": "🧢",
-      "image": "",
+      "image": "/demo/cat-accesorios.svg",
       "accent": "#7c5cff",
       "description": "Gorras, medias y complementos para completar tu look."
     }
@@ -89,7 +90,9 @@
         "L",
         "XL"
       ],
-      "images": [],
+      "images": [
+        "/demo/camisa-real-madrid-blanca.svg"
+      ],
       "inStock": true
     },
     {
@@ -109,7 +112,9 @@
         "XL",
         "XXL"
       ],
-      "images": [],
+      "images": [
+        "/demo/camisa-barcelona-roja.svg"
+      ],
       "inStock": true
     },
     {
@@ -128,7 +133,9 @@
         "L",
         "XL"
       ],
-      "images": [],
+      "images": [
+        "/demo/camisa-seleccion-mexico.svg"
+      ],
       "inStock": true
     },
     {
@@ -145,7 +152,9 @@
         "50ml",
         "100ml"
       ],
-      "images": [],
+      "images": [
+        "/demo/perfume-oud-royal.svg"
+      ],
       "inStock": true
     },
     {
@@ -162,7 +171,9 @@
         "50ml",
         "100ml"
       ],
-      "images": [],
+      "images": [
+        "/demo/perfume-blanc-nuit.svg"
+      ],
       "inStock": true
     },
     {
@@ -178,7 +189,9 @@
       "sizes": [
         "Única"
       ],
-      "images": [],
+      "images": [
+        "/demo/gorra-dorada.svg"
+      ],
       "inStock": true
     }
   ]

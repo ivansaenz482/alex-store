@@ -1,0 +1,55 @@
+# ============================================================
+#  ALEX.STORE - despliegue con Docker Compose
+#  App (Next.js) + Nginx (proxy) + Certbot (HTTPS automático)
+# ============================================================
+#  1) Pon tu dominio en nginx/conf.d/alexstore.conf
+#  2) Crea un archivo .env:
+#        ADMIN_PASSWORD=contraseña-segura
+#        ADMIN_SECRET=secreto-largo-aleatorio
+#  3) Ejecuta:
+#        docker compose up -d
+#  4) Emite el certificado HTTPS (ver README, sección Despliege en VPS):
+#        docker compose run --rm certbot ...
+# ============================================================
+
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-alexstore}
+      - ADMIN_SECRET=${ADMIN_SECRET:-alex-store-secret-2026}
+    volumes:
+      # Persistencia: fotos subidas y estadísticas sobreviven reinicios
+      - store_data:/app/data
+      - uploads_data:/app/public/uploads
+    expose:
+      - "3000"
+
+  nginx:
+    image: nginx:alpine
+    depends_on:
+      - app
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/certbot/conf:/etc/letsencrypt
+      - ./nginx/certbot/www:/var/www/certbot
+    command: '/bin/sh -c '"'"'while :; do sleep 6h & wait $${!}; nginx -s reload; done & exec nginx -g "daemon off;"'"'"''
+
+  certbot:
+    image: certbot/certbot
+    restart: unless-stopped
+    volumes:
+      - ./nginx/certbot/conf:/etc/letsencrypt
+      - ./nginx/certbot/www:/var/www/certbot
+    entrypoint: /bin/sh
+    command: '-c "trap exit TERM; while :; do certbot renew --webroot -w /var/www/certbot --quiet; sleep 12h & wait $${!}; done"'
+
+volumes:
+  store_data:
+  uploads_data:

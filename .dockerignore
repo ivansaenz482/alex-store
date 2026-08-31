@@ -1,0 +1,14 @@
+# Leé estos archivos para saber qué NO copiar a la imagen.
+node_modules
+.next
+.git
+.env
+.env.local
+.env*.local
+*.log
+data/analytics.json
+public/uploads/*
+*.tsbuildinfo
+next-env.d.ts
+.vscode
+.vercel

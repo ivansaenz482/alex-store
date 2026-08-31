@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -36,12 +35,13 @@ export function ProductImage({
 
   return (
     <div className={cn("relative overflow-hidden", className)}>
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src={src}
         alt={alt}
-        fill
-        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-        className={cn("object-cover", imgClassName)}
+        loading="lazy"
+        decoding="async"
+        className={cn("h-full w-full object-cover", imgClassName)}
         onError={() => setError(true)}
       />
     </div>

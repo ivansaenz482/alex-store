@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0b10"/>
+      <stop offset="1" stop-color="#16161f"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.5">
+      <stop offset="0" stop-color="rgba(255,46,154,0.55)"/>
+      <stop offset="1" stop-color="rgba(255,46,154,0)"/>
+    </radialGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ccff00"/>
+      <stop offset="0.5" stop-color="#7c5cff"/>
+      <stop offset="1" stop-color="#ff2e9a"/>
+    </linearGradient>
+    <linearGradient id="band" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="rgba(255,46,154,0)"/>
+      <stop offset="0.5" stop-color="rgba(255,46,154,0.9)"/>
+      <stop offset="1" stop-color="rgba(255,46,154,0)"/>
+    </linearGradient>
+    
+  <pattern id="stperfume-oud-royal.svg" width="60" height="60" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+    <rect width="60" height="60" fill="none"/>
+    <rect width="14" height="60" fill="rgba(255,46,154,0.09)"/>
+  </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <rect width="800" height="1000" fill="url(#stperfume-oud-royal.svg)"/>
+  <rect width="800" height="1000" fill="url(#glow)"/>
+  
+    <g transform="translate(40,60) scale(1)" font-family="Arial,sans-serif" font-weight="800">
+      <text y="0" font-size="26" fill="#ccff00">A</text>
+      <text x="16" y="0" font-size="26" fill="url(#logo)">LEX.STORE</text>
+    </g>
+  <circle cx="400" cy="400" r="150" fill="none" stroke="rgba(255,46,154,0.14)" stroke-width="2"/>
+  <text x="400" y="420" font-size="230" text-anchor="middle">🧴</text>
+  <rect x="60" y="600" width="680" height="4" rx="2" fill="url(#band)"/>
+  <text x="400" y="720" font-family="Arial,sans-serif" font-weight="800" font-size="42" text-anchor="middle" fill="#ffffff">Perfume Oud Royal 100ml</text>
+  <text x="400" y="790" font-family="Arial,sans-serif" font-size="22" text-anchor="middle" fill="rgba(255,46,154,1)" letter-spacing="4" text-transform="uppercase">Perfumes</text>
+</svg>
