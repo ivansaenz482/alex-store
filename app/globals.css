@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050507;
+  --surface: #0d0d12;
+  --surface-2: #14141b;
+  --border: rgba(255, 255, 255, 0.08);
+  --foreground: #f5f5f7;
+
+  --volt: #ccff00;
+  --volt-soft: #e6ff6b;
+  --magenta: #ff2e9a;
+  --violet: #7c5cff;
+
+  --brand-gradient: linear-gradient(120deg, #ccff00 0%, #7c5cff 55%, #ff2e9a 100%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-foreground: var(--foreground);
+
+  --color-volt: var(--volt);
+  --color-volt-soft: var(--volt-soft);
+  --color-magenta: var(--magenta);
+  --color-violet: var(--violet);
+
+  --font-display: var(--font-sora);
+  --font-sans: var(--font-sora);
+
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+  --animate-pulse-ring: pulseRing 2.4s ease-out infinite;
+
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+* {
+  border-color: var(--border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.brand-text {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.brand-bg {
+  background: var(--brand-gradient);
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 54px 54px;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}

@@ -1,0 +1,185 @@
+{
+  "store": {
+    "name": "ALEX.STORE",
+    "slogan": "Estilo que se nota, precio que se agradece.",
+    "announcement": "🔥 Envíos a todo el país · Camisas de fútbol y perfumes originales · Aceptamos pagos por transferencia 💳",
+    "description": "Tu tienda de camisas de fútbol y perfumes. Calidad, originalidad y los mejores precios para que luzcas increíble.",
+    "instagram": "alex.store",
+    "tiktok": "alex.store",
+    "email": "ventas@alexstore.com"
+  },
+  "whatsapp": {
+    "number": "+521234567890",
+    "message": "Hola ALEX.STORE 👋, quiero más información sobre sus productos."
+  },
+  "categories": [    {
+      "id": "camisas-futbol",
+      "name": "Camisas de Fútbol",
+      "emoji": "⚽",
+      "image": "",
+      "accent": "#ccff00",
+      "description": "Camisas de clubes y selecciones, con versiones jugador y de fan."
+    },
+    {
+      "id": "perfumes",
+      "name": "Perfumes",
+      "emoji": "🧴",
+      "image": "",
+      "accent": "#ff2e9a",
+      "description": "Fragancias y perfumería de lujo para hacerte notar."
+    },
+    {
+      "id": "accesorios",
+      "name": "Accesorios",
+      "emoji": "🧢",
+      "image": "",
+      "accent": "#7c5cff",
+      "description": "Gorras, medias y complementos para completar tu look."
+    }
+  ],
+  "promotions": [
+    {
+      "id": "promo-mundial",
+      "title": "Edición Mundial 2026",
+      "description": "Llévate la camisa de tu selección con un descuento exclusivo y envío gratis.",
+      "emoji": "🏆",
+      "color": "#ccff00",
+      "discount": 20,
+      "badge": "Temporada",
+      "categoryId": "camisas-futbol",
+      "active": true
+    },
+    {
+      "id": "promo-perfumeria",
+      "title": "Piramide de Fragancias",
+      "description": "Descubre los perfumes más pedidos y déjate llevar por notas de lujo.",
+      "emoji": "✨",
+      "color": "#ff2e9a",
+      "discount": 15,
+      "badge": "Lujo",
+      "categoryId": "perfumes",
+      "active": true
+    },
+    {
+      "id": "promo-combo",
+      "title": "Combo Camisa + Perfume",
+      "description": "Arma tu combo perfecto: una camisa y un perfume con precio de amigo.",
+      "emoji": "🎁",
+      "color": "#7c5cff",
+      "discount": 25,
+      "badge": "Combo",
+      "categoryId": "todos",
+      "active": true
+    }
+  ],
+  "products": [
+    {
+      "id": "camisa-real-madrid-blanca",
+      "name": "Camisa Real Madrid 24/25",
+      "categoryId": "camisas-futbol",
+      "price": 199,
+      "originalPrice": 299,
+      "currency": "$",
+      "description": "Camisa oficial del Real Madrid. Tela transpirable, versiones jugador y fan. Ideal para llenarte de orgullo merengue.",
+      "badge": "Nuevo",
+      "featured": true,
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [],
+      "inStock": true
+    },
+    {
+      "id": "camisa-barcelona-roja",
+      "name": "Camisa Barcelona 24/25",
+      "categoryId": "camisas-futbol",
+      "price": 199,
+      "originalPrice": 279,
+      "currency": "$",
+      "description": "Camisa del Barcelona con tejido de alta calidad y acabados premium. Disponible en todas las tallas.",
+      "badge": "Top ventas",
+      "featured": true,
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "images": [],
+      "inStock": true
+    },
+    {
+      "id": "camisa-seleccion-mexico",
+      "name": "Camisa Selección México 2026",
+      "categoryId": "camisas-futbol",
+      "price": 229,
+      "originalPrice": 329,
+      "currency": "$",
+      "description": "La nueva piel del Tri. Diseño histórico para el mundial, con detalles bordados.",
+      "badge": "Edición Mundial",
+      "featured": true,
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [],
+      "inStock": true
+    },
+    {
+      "id": "perfume-oud-royal",
+      "name": "Perfume Oud Royal 100ml",
+      "categoryId": "perfumes",
+      "price": 349,
+      "originalPrice": 449,
+      "currency": "$",
+      "description": "Fragancia masculina intensa con notas de oud, ámbar y especias. Larga duración para dejarte huella.",
+      "badge": "Lujo",
+      "featured": true,
+      "sizes": [
+        "50ml",
+        "100ml"
+      ],
+      "images": [],
+      "inStock": true
+    },
+    {
+      "id": "perfume-blanc-nuit",
+      "name": "Perfume Blanc Nuit 100ml",
+      "categoryId": "perfumes",
+      "price": 299,
+      "originalPrice": 379,
+      "currency": "$",
+      "description": "Fragancia unisex fresca y elegante con salidas cítricas y fondo amaderado. Perfecta para el día a día.",
+      "badge": "Favorito",
+      "featured": true,
+      "sizes": [
+        "50ml",
+        "100ml"
+      ],
+      "images": [],
+      "inStock": true
+    },
+    {
+      "id": "gorra-dorada",
+      "name": "Gorra Premium Logotipo",
+      "categoryId": "accesorios",
+      "price": 89,
+      "originalPrice": 129,
+      "currency": "$",
+      "description": "Gorra deportiva con bordado premium y ajuste trasero. Combina con camisas de fútbol y look casual.",
+      "badge": "Único",
+      "featured": false,
+      "sizes": [
+        "Única"
+      ],
+      "images": [],
+      "inStock": true
+    }
+  ]
+}
