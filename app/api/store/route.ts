@@ -10,7 +10,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   const token = request.cookies.get(COOKIE_NAME)?.value;
-  if (!validateToken(token)) {
+  if (!(await validateToken(token))) {
     return Response.json({ error: "No autorizado" }, { status: 401 });
   }
 

@@ -15,7 +15,7 @@ function daysAgo(n: number) {
 
 export async function GET(request: NextRequest) {
   const token = request.cookies.get(COOKIE_NAME)?.value;
-  if (!validateToken(token)) {
+  if (!(await validateToken(token))) {
     return Response.json({ error: "No autorizado" }, { status: 401 });
   }
 
@@ -90,7 +90,7 @@ export async function GET(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   const token = request.cookies.get(COOKIE_NAME)?.value;
-  if (!validateToken(token)) {
+  if (!(await validateToken(token))) {
     return Response.json({ error: "No autorizado" }, { status: 401 });
   }
   await clearAnalytics();

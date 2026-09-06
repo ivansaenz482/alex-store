@@ -1,10 +1,10 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { verifyPassword, adminToken, COOKIE_NAME } from "@/lib/auth";
+import { verifyPassword, currentAdminToken, COOKIE_NAME } from "@/lib/auth";
 
 export async function POST(request: NextRequest) {
   const { password } = await request.json().catch(() => ({ password: "" }));
 
-  if (!verifyPassword(password)) {
+  if (!(await verifyPassword(password))) {
     return NextResponse.json({ error: "Contraseña incorrecta" }, { status: 401 });
   }
 
@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   const isHttps = request.url.startsWith("https") || forwarded.includes("https");
 
   const response = NextResponse.json({ ok: true });
-  response.cookies.set(COOKIE_NAME, adminToken(), {
+  response.cookies.set(COOKIE_NAME, await currentAdminToken(), {
     httpOnly: true,
     sameSite: "lax",
     path: "/",

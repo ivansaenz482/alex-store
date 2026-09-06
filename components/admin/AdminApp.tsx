@@ -20,6 +20,7 @@ import { SettingsEditor } from "./SettingsEditor";
 import { PromotionsEditor } from "./PromotionsEditor";
 import { AnalyticsView } from "./AnalyticsView";
 import { BackupPanel } from "./BackupPanel";
+import { ChangePassword } from "./ChangePassword";
 import { cn } from "@/lib/utils";
 
 type Tab =
@@ -176,7 +177,12 @@ export function AdminApp() {
         )}
         {tab === "estadisticas" && <AnalyticsView />}
         {tab === "backup" && <BackupPanel />}
-        {tab === "ajustes" && <SettingsEditor data={data} onChange={onChange} />}
+        {tab === "ajustes" && (
+          <div className="space-y-6">
+            <ChangePassword />
+            <SettingsEditor data={data} onChange={onChange} />
+          </div>
+        )}
       </main>
     </div>
   );

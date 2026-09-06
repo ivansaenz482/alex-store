@@ -10,7 +10,7 @@ export const metadata = { title: "Acceso Admin | ALEX.STORE" };
 export default async function AdminLoginPage() {
   const store = await cookies();
   const token = store.get(COOKIE_NAME)?.value;
-  if (validateToken(token)) {
+  if (await validateToken(token)) {
     redirect("/admin");
   }
   return <AdminLogin />;

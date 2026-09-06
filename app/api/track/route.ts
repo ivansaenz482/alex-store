@@ -4,7 +4,7 @@ import { validateToken, COOKIE_NAME } from "@/lib/auth";
 
 export async function POST(request: NextRequest) {
   const admin = request.cookies.get(COOKIE_NAME)?.value;
-  if (validateToken(admin)) {
+  if (await validateToken(admin)) {
     return Response.json({ ok: true });
   }
 
