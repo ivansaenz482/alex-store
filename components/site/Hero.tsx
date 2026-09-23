@@ -17,7 +17,7 @@ export function Hero({
   return (
     <section
       id="inicio"
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pt-28"
+      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 pb-24 pt-32"
     >
       <div className="grid-bg pointer-events-none absolute inset-0 opacity-70" />
       <div className="pointer-events-none absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-volt/20 blur-[130px]" />
@@ -35,13 +35,13 @@ export function Hero({
           {storeName}
         </span>
 
-        <h1 className="text-5xl font-extrabold leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
+        <h1 className="text-4xl font-extrabold leading-[0.95] tracking-tight sm:text-6xl lg:text-8xl">
           CAMISAS Y{" "}
           <span className="brand-text">PERFUMES</span>{" "}
           QUE IMPACTAN
         </h1>
 
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-white/70 sm:text-xl">
+        <p className="mx-auto mt-6 max-w-2xl text-base text-white/70 sm:text-xl">
           {slogan}
         </p>
 

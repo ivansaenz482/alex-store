@@ -83,13 +83,13 @@ export function ProductEditor({ products, categories, onChange }: Props) {
             layout
             className="flex items-center gap-4 rounded-2xl border border-white/8 bg-white/3 p-3"
           >
-            <div className="relative h-16 w-16 overflow-hidden rounded-xl bg-surface-2">
+            <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-surface-2">
               {p.images[0] ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={p.images[0]}
                   alt={p.name}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-contain p-1"
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center text-2xl">

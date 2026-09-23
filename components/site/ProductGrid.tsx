@@ -28,8 +28,8 @@ export function ProductGrid({
       : products.filter((p) => p.categoryId === activeCategory);
 
   return (
-    <section id="catalogo" className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6">
-      <div className="mb-10">
+    <section id="catalogo" className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
+      <div className="mb-8 sm:mb-10">
         <p className="text-xs font-bold uppercase tracking-[0.25em] text-volt">
           Catálogo completo
         </p>
@@ -38,7 +38,7 @@ export function ProductGrid({
         </h2>
       </div>
 
-      <div className="no-scrollbar mb-10 flex gap-2 overflow-x-auto pb-2">
+      <div className="no-scrollbar mb-8 flex gap-2 overflow-x-auto pb-2 sm:mb-10">
         {filters.map((f) => (
           <button
             key={f.id}
@@ -60,7 +60,7 @@ export function ProductGrid({
           No hay productos en esta categoría todavía. Muy pronto...
         </p>
       ) : (
-        <motion.div layout className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        <motion.div layout className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
           <AnimatePresence mode="popLayout">
             {visible.map((p, i) => (
               <motion.div layout key={p.id} exit={{ opacity: 0, scale: 0.9 }}>

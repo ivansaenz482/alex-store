@@ -56,21 +56,21 @@ export function ProductCard({
         )}
       </div>
 
-      <div className="p-5">
-        <p className="text-xs uppercase tracking-widest text-white/40">{cat.name}</p>
-        <h3 className="mt-1 line-clamp-2 font-bold leading-snug">{product.name}</h3>
+      <div className="p-4 sm:p-5">
+        <p className="text-[10px] uppercase tracking-widest text-white/40 sm:text-xs">{cat.name}</p>
+        <h3 className="mt-1 line-clamp-2 text-sm font-bold leading-snug sm:text-base">{product.name}</h3>
         <div className="mt-3 flex items-center justify-between">
           <div className="flex items-baseline gap-2">
-            <span className="text-xl font-extrabold brand-text">
+            <span className="text-lg font-extrabold brand-text sm:text-xl">
               {formatPrice(product.price, product.currency)}
             </span>
             {originalPrice(product) && (
-              <span className="text-sm text-white/40 line-through">
+              <span className="text-xs text-white/40 line-through sm:text-sm">
                 {originalPrice(product)}
               </span>
             )}
           </div>
-          <Heart className="text-white/30 transition-colors group-hover:text-volt" size={18} />
+          <Heart className="hidden text-white/30 transition-colors group-hover:text-volt sm:block" size={18} />
         </div>
       </div>
     </motion.div>

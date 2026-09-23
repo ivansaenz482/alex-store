@@ -75,11 +75,56 @@
   border-color: var(--border);
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  -webkit-tap-highlight-color: transparent;
+  color-scheme: dark;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-display), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Modo PWA instalada (standalone): respeta notch y barras del sistema ── */
+@media (display-mode: standalone) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+.safe-bottom {
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+}
+
+.safe-right {
+  right: max(1.25rem, env(safe-area-inset-right));
+}
+
+/* Fondo elegante para que las fotos de producto se vean completas (sin recortes) */
+.product-media {
+  background:
+    radial-gradient(circle at 50% 38%, rgba(57, 255, 20, 0.1), transparent 62%),
+    linear-gradient(160deg, var(--surface-2) 0%, var(--surface) 55%, var(--background) 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
 
 .brand-text {

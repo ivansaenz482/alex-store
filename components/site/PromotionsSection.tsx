@@ -24,8 +24,8 @@ export function PromotionsSection({
   if (active.length === 0) return null;
 
   return (
-    <section className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6">
-      <div className="mb-10">
+    <section className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
+      <div className="mb-8 sm:mb-10">
         <p className="text-xs font-bold uppercase tracking-[0.25em] text-volt">
           Ofertas
         </p>

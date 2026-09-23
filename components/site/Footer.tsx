@@ -2,6 +2,7 @@
 import { Music2, Mail, ShieldCheck, Truck, BadgeCheck } from "lucide-react";
 import type { StoreData } from "@/lib/types";
 import { whatsappLink } from "@/lib/utils";
+import { PushButton } from "./PushButton";
 
 function InstagramIcon({ size = 18 }: { size?: number }) {
   return (
@@ -110,6 +111,9 @@ export function Footer({ data }: { data: StoreData }) {
             {store.email && (
               <p className="mt-3 text-sm text-white/55">{store.email}</p>
             )}
+            <div className="mt-4">
+              <PushButton />
+            </div>
           </div>
         </div>
 

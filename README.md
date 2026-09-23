@@ -18,6 +18,24 @@ npm run dev
 
 Abre [http://localhost:3000](http://localhost:3000).
 
+## 📱 Modo PWA (instalable)
+
+La tienda es una **Progressive Web App**: se puede **instalar como app** en celular, tablet o PC (sin tiendas de aplicaciones) y funciona aunque no haya internet.
+
+- 📄 Manifest: `app/manifest.ts` → `/manifest.webmanifest`
+- 🖼️ Iconos (generados como PNG): `/api/pwa-icon?size=192`, `?size=512` y `?size=512&maskable=1`
+- ⚙️ Service worker (offline + caché): `public/sw.js`
+- 🔘 Botón **“Instalar app”** en la barra de navegación (en iOS muestra los pasos de Safari).
+
+> ℹ️ El instalador y el service worker solo funcionan sobre **HTTPS** o en **localhost**. Para probarlo en producción ejecuta `npm run build && npm start` (o despliégalo en tu dominio con HTTPS).
+
+## 🔗 Enlaces principales
+
+| Página            | Local                          | Producción                        |
+| ----------------- | ------------------------------ | --------------------------------- |
+| Tienda (pública)  | `http://localhost:3000`        | `https://TU-DOMINIO`              |
+| Panel de admin    | `http://localhost:3000/admin`  | `https://TU-DOMINIO/admin`        |
+
 ## 🔐 Panel de administración
 
 Entra en **`http://localhost:3000/admin`** y usa la contraseña definida en `.env.local` (por defecto `alexstore`).

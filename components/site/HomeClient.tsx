@@ -10,6 +10,7 @@ import { FeaturedCarousel } from "./FeaturedCarousel";
 import { ProductGrid } from "./ProductGrid";
 import { ProductModal } from "./ProductModal";
 import { WhatsappFloat } from "./WhatsappFloat";
+import { MobileNav } from "./MobileNav";
 import { Footer } from "./Footer";
 
 export function HomeClient({ data }: { data: StoreData }) {
@@ -50,7 +51,7 @@ export function HomeClient({ data }: { data: StoreData }) {
   };
 
   return (
-    <div className="relative">
+    <div className="relative pb-[68px] md:pb-0">
       <Navbar
         announcement={data.store.announcement}
         whatsapp={data.whatsapp}
@@ -104,6 +105,8 @@ export function HomeClient({ data }: { data: StoreData }) {
         number={data.whatsapp.number}
         message={data.whatsapp.message}
       />
+
+      <MobileNav whatsapp={data.whatsapp} />
     </div>
   );
 }

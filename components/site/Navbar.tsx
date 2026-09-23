@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "./ui";
+import { InstallPwaButton } from "./InstallPwaButton";
 import { whatsappLink } from "@/lib/utils";
 
 const links = [
@@ -46,7 +47,8 @@ export function Navbar({
             ))}
           </nav>
 
-          <div className="hidden md:block">
+          <div className="hidden items-center gap-2 md:flex">
+            <InstallPwaButton />
             <a
               href={whatsappLink(whatsapp.number, whatsapp.message)}
               target="_blank"
@@ -97,6 +99,7 @@ export function Navbar({
                   📲 Pedir por WhatsApp
                 </Button>
               </a>
+              <InstallPwaButton fullWidth className="mt-2" />
             </div>
           </motion.nav>
         )}

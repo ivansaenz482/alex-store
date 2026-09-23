@@ -12,12 +12,14 @@ export function ProductImageCarousel({
   emoji,
   aspect = "aspect-square",
   showControls = true,
+  fit = "contain",
 }: {
   images: string[];
   alt: string;
   emoji: string;
   aspect?: string;
   showControls?: boolean;
+  fit?: "contain" | "cover";
 }) {
   const slides = images.length ? images : [""];
   const isPlaceholder = images.length === 0;
@@ -52,6 +54,7 @@ export function ProductImageCarousel({
                 src={isPlaceholder ? undefined : src}
                 alt={alt}
                 emoji={emoji}
+                fit={fit}
                 className={cn("w-full", aspect)}
                 imgClassName="transition-transform duration-700 group-hover:scale-105"
               />

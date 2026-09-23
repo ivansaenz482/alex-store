@@ -11,8 +11,8 @@ export function CategoriesSection({
   onSelect: (id: string) => void;
 }) {
   return (
-    <section id="categorias" className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6">
-      <div className="mb-12 flex items-end justify-between">
+    <section id="categorias" className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
+      <div className="mb-10 flex items-end justify-between sm:mb-12">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-volt">
             Explora

@@ -21,6 +21,7 @@ import { PromotionsEditor } from "./PromotionsEditor";
 import { AnalyticsView } from "./AnalyticsView";
 import { BackupPanel } from "./BackupPanel";
 import { ChangePassword } from "./ChangePassword";
+import { NotificationsPanel } from "./NotificationsPanel";
 import { cn } from "@/lib/utils";
 
 type Tab =
@@ -180,6 +181,7 @@ export function AdminApp() {
         {tab === "ajustes" && (
           <div className="space-y-6">
             <ChangePassword />
+            <NotificationsPanel />
             <SettingsEditor data={data} onChange={onChange} />
           </div>
         )}

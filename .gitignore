@@ -45,6 +45,10 @@ yarn-error.log*
 # contadores de visitas/productos (runtime, reiniciables desde el admin)
 data/analytics.json
 
+# claves privadas de notificaciones push y suscriptores (runtime, NO subir)
+data/vapid.json
+data/push-subscriptions.json
+
 # vercel
 .vercel
 
