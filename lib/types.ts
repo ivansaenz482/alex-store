@@ -31,6 +31,7 @@ export interface Promotion {
   discount?: number;
   badge?: string;
   categoryId?: string;
+  image?: string;
   active: boolean;
 }
 

@@ -246,10 +246,14 @@ export function ProductEditor({ products, categories, onChange }: Props) {
                 />
               </Field>
 
-              <Field label="Imágenes" hint="Sube varias fotos para el carrusel de ángulos.">
+              <Field
+                label="Imágenes"
+                hint="Hasta 10 fotos por producto (se muestran en carrusel)."
+              >
                 <ImageUploader
                   value={editing.images}
                   onChange={(urls) => setEditing({ ...editing, images: urls })}
+                  max={10}
                 />
               </Field>
 

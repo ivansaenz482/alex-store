@@ -107,8 +107,8 @@ export function ImageUploader({
       />
 
       <p className="mt-2 flex items-center gap-1.5 text-xs text-white/40">
-        <Upload size={12} /> JPG, PNG, WEBP, GIF o AVIF · máx 8MB · toca una
-        imagen para verla completa
+        <Upload size={12} /> Máx {max} imagen{max === 1 ? "" : "es"} · JPG, PNG,
+        WEBP, GIF o AVIF (8MB c/u) · toca una imagen para verla completa
       </p>
 
       <AnimatePresence>

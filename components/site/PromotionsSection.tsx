@@ -47,7 +47,7 @@ export function PromotionsSection({
               >
                 <motion.div
                   whileHover={{ y: -6 }}
-                  className="relative h-full overflow-hidden rounded-3xl border border-white/10 p-8"
+                  className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 p-6 sm:p-8"
                   style={{
                     background: `linear-gradient(135deg, ${promo.color}1f, ${promo.color}08 60%, transparent)`,
                   }}
@@ -56,21 +56,33 @@ export function PromotionsSection({
                     className="pointer-events-none absolute -right-14 -top-14 h-52 w-52 rounded-full opacity-25 blur-3xl"
                     style={{ background: promo.color }}
                   />
-                  <div className="relative">
+                  {promo.image && (
+                    <div className="relative mb-5 h-36 w-full overflow-hidden rounded-2xl border border-white/10 sm:h-40">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={promo.image}
+                        alt={promo.title}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                  )}
+                  <div className="relative flex flex-1 flex-col">
                     {promo.badge && (
                       <span
-                        className="inline-flex rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider text-background"
+                        className="inline-flex w-fit rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider text-background"
                         style={{ background: promo.color }}
                       >
                         {promo.badge}
                       </span>
                     )}
-                    <div className="mt-6 text-6xl">{promo.emoji}</div>
+                    <div className={promo.image ? "mt-4 text-4xl" : "mt-6 text-6xl"}>
+                      {promo.emoji}
+                    </div>
                     <h3 className="mt-4 text-2xl font-extrabold">{promo.title}</h3>
                     <p className="mt-2 max-w-md text-sm text-white/65">
                       {promo.description}
                     </p>
-                    <div className="mt-6 flex items-center justify-between gap-4">
+                    <div className="mt-auto flex items-center justify-between gap-4 pt-6">
                       {promo.discount ? (
                         <div className="flex items-baseline gap-1">
                           <span

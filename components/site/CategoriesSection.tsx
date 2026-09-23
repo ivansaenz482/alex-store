@@ -38,8 +38,19 @@ export function CategoriesSection({
               className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full opacity-30 blur-2xl transition-opacity group-hover:opacity-60"
               style={{ background: cat.accent }}
             />
+            {cat.image && (
+              <div className="relative mb-5 h-40 w-full overflow-hidden rounded-xl border border-white/8">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={cat.image}
+                  alt={cat.name}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface/85 via-surface/10 to-transparent" />
+              </div>
+            )}
             <div className="relative flex items-center justify-between">
-              <span className="text-5xl">{cat.emoji}</span>
+              <span className={cat.image ? "text-3xl" : "text-5xl"}>{cat.emoji}</span>
               <ArrowUpRight className="text-white/40 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white" />
             </div>
             <div className="relative mt-5">

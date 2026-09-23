@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Pencil, Trash2, X } from "lucide-react";
 import type { Promotion, Category } from "@/lib/types";
 import { Field, TextInput, TextArea, Select } from "./fields";
+import { ImageUploader } from "./ImageUploader";
 import { Button } from "@/components/site/ui";
 import { slugify } from "@/lib/utils";
 import { Toggle } from "./ProductEditor";
@@ -233,6 +234,19 @@ export function PromotionsEditor({ promotions, categories, onChange }: Props) {
                     className="flex-1"
                   />
                 </div>
+              </Field>
+
+              <Field
+                label="Imagen de la promoción (opcional)"
+                hint="Se muestra dentro de la tarjeta de la promoción."
+              >
+                <ImageUploader
+                  value={editing.image ? [editing.image] : []}
+                  onChange={(urls) =>
+                    setEditing({ ...editing, image: urls[0] ?? undefined })
+                  }
+                  max={1}
+                />
               </Field>
 
               <div className="rounded-2xl border border-white/8 bg-white/3 p-4">
