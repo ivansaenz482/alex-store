@@ -66,14 +66,20 @@ export function ProductImageCarousel({
       {showControls && !isPlaceholder && slides.length > 1 && (
         <>
           <button
-            onClick={() => emblaApi?.scrollPrev()}
+            onClick={(e) => {
+              e.stopPropagation();
+              emblaApi?.scrollPrev();
+            }}
             className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-background/70 text-white backdrop-blur transition-colors hover:bg-volt hover:text-background"
             aria-label="Anterior"
           >
             <ChevronLeft size={18} />
           </button>
           <button
-            onClick={() => emblaApi?.scrollNext()}
+            onClick={(e) => {
+              e.stopPropagation();
+              emblaApi?.scrollNext();
+            }}
             className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-background/70 text-white backdrop-blur transition-colors hover:bg-volt hover:text-background"
             aria-label="Siguiente"
           >
@@ -87,7 +93,10 @@ export function ProductImageCarousel({
           {slides.map((_, i) => (
             <button
               key={i}
-              onClick={() => emblaApi?.scrollTo(i)}
+              onClick={(e) => {
+                e.stopPropagation();
+                emblaApi?.scrollTo(i);
+              }}
               className={cn(
                 "h-1.5 rounded-full transition-all",
                 i === selected ? "w-5 bg-volt" : "w-1.5 bg-white/40"
