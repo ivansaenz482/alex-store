@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { X, Check, MessageCircle, Ruler } from "lucide-react";
+import { X, MessageCircle, Ruler, ShoppingBag } from "lucide-react";
 import type { Product, Category } from "@/lib/types";
 import { ProductImageCarousel } from "./ProductImageCarousel";
+import { useCart } from "./CartContext";
 import { Button, Badge } from "./ui";
 import { cn, formatPrice, whatsappLink } from "@/lib/utils";
 
@@ -19,6 +20,7 @@ export function ProductModal({
   onClose: () => void;
 }) {
   const [size, setSize] = useState<string>("");
+  const { add } = useCart();
 
   if (!product) return null;
   const cat = category ?? { emoji: "🛍️", name: "Producto" };
@@ -32,6 +34,20 @@ export function ProductModal({
     product.price,
     product.currency
   )}${size ? `\n📏 Talla: ${size}` : ""}\n\n¿Me confirman disponibilidad?`;
+
+  function addToCart() {
+    if (!product) return;
+    add({
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+      currency: product.currency,
+      image: product.images[0],
+      categoryName: cat.name,
+      size: size || undefined,
+    });
+    onClose();
+  }
 
   return (
     <motion.div
@@ -127,36 +143,33 @@ export function ProductModal({
               </div>
             )}
 
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-col gap-3">
+              <Button
+                variant="volt"
+                className="w-full"
+                disabled={product.sizes.length > 0 && !size}
+                onClick={addToCart}
+              >
+                <ShoppingBag size={18} /> Agregar al carrito
+              </Button>
               <a
                 href={whatsappLink(whatsappNumber, orderMessage)}
                 target="_blank"
                 rel="noreferrer"
-                className="flex-1"
+                className="block"
               >
-                <Button variant="volt" className="w-full">
-                  <MessageCircle size={18} /> Pedir por WhatsApp
+                <Button variant="outline" className="w-full">
+                  <MessageCircle size={18} /> Pedir directo por WhatsApp
                 </Button>
               </a>
-              <Button
-                variant="outline"
-                onClick={onClose}
-                className="sm:w-auto"
-              >
-                Seguir viendo
-              </Button>
             </div>
 
-            {size ? (
-              <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-white/50">
-                <Check size={14} className="text-volt" /> Talla seleccionada: {size}
+            {product.sizes.length > 0 && (
+              <p className="mt-3 text-center text-xs text-white/45">
+                {size
+                  ? `Talla seleccionada: ${size}`
+                  : "Elige una talla para agregar al carrito."}
               </p>
-            ) : (
-              product.sizes.length > 0 && (
-                <p className="mt-3 text-center text-xs text-white/40">
-                  Toca una talla para incluirla en tu pedido
-                </p>
-              )
             )}
           </div>
         </div>

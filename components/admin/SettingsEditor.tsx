@@ -12,7 +12,13 @@ export function SettingsEditor({
   data: StoreData;
   onChange: (data: Partial<StoreData>) => void;
 }) {
-  const [store, setStore] = useState<StoreSettings>({ ...data.store });
+  const [store, setStore] = useState<StoreSettings>({
+    ...data.store,
+    paymentMethods:
+      data.store.paymentMethods && data.store.paymentMethods.length > 0
+        ? data.store.paymentMethods
+        : ["Transferencia", "Efectivo"],
+  });
   const [whatsapp, setWhatsapp] = useState<WhatsAppSettings>({ ...data.whatsapp });
 
   function save() {
@@ -68,6 +74,34 @@ export function SettingsEditor({
             <TextInput
               value={store.email ?? ""}
               onChange={(e) => setStore({ ...store, email: e.target.value })}
+            />
+          </Field>
+          <Field
+            label="Formas de pago"
+            hint="Sepáralas con comas. Aparecen al finalizar el pedido."
+          >
+            <TextInput
+              value={(store.paymentMethods ?? []).join(", ")}
+              onChange={(e) =>
+                setStore({
+                  ...store,
+                  paymentMethods: e.target.value
+                    .split(",")
+                    .map((s) => s.trim())
+                    .filter(Boolean),
+                })
+              }
+              placeholder="Transferencia, Efectivo"
+            />
+          </Field>
+          <Field
+            label="Nota de envío / pago (opcional)"
+            hint="Se muestra en el carrito antes de enviar el pedido."
+          >
+            <TextArea
+              value={store.shippingNote ?? ""}
+              onChange={(e) => setStore({ ...store, shippingNote: e.target.value })}
+              placeholder="Envíos a todo el país. Datos de transferencia al confirmar."
             />
           </Field>
         </div>

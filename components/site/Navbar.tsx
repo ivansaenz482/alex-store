@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingBag } from "lucide-react";
 import { Button } from "./ui";
 import { InstallPwaButton } from "./InstallPwaButton";
+import { useCart } from "./CartContext";
 import { whatsappLink } from "@/lib/utils";
 
 const links = [
@@ -21,6 +22,7 @@ export function Navbar({
   whatsapp: { number: string; message: string };
 }) {
   const [open, setOpen] = useState(false);
+  const { count: cartCount, setOpen: setCartOpen } = useCart();
 
   return (
     <header className="fixed inset-x-0 top-0 z-40">
@@ -60,13 +62,28 @@ export function Navbar({
             </a>
           </div>
 
-          <button
-            className="flex h-10 w-10 items-center justify-center md:hidden"
-            onClick={() => setOpen((o) => !o)}
-            aria-label="Menú"
-          >
-            {open ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={() => setCartOpen(true)}
+              className="relative flex h-10 w-10 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+              aria-label="Carrito"
+            >
+              <ShoppingBag size={20} />
+              {cartCount > 0 && (
+                <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-volt px-1 text-[10px] font-extrabold text-background">
+                  {cartCount}
+                </span>
+              )}
+            </button>
+
+            <button
+              className="flex h-10 w-10 items-center justify-center md:hidden"
+              onClick={() => setOpen((o) => !o)}
+              aria-label="Menú"
+            >
+              {open ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
       </div>
 

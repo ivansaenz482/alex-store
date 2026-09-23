@@ -12,6 +12,8 @@ import { ProductModal } from "./ProductModal";
 import { WhatsappFloat } from "./WhatsappFloat";
 import { MobileNav } from "./MobileNav";
 import { InstallBanner } from "./InstallBanner";
+import { CartProvider } from "./CartContext";
+import { CartDrawer } from "./CartDrawer";
 import { Footer } from "./Footer";
 
 export function HomeClient({ data }: { data: StoreData }) {
@@ -51,65 +53,79 @@ export function HomeClient({ data }: { data: StoreData }) {
     document.getElementById("catalogo")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const paymentMethods =
+    data.store.paymentMethods && data.store.paymentMethods.length > 0
+      ? data.store.paymentMethods
+      : ["Transferencia", "Efectivo"];
+
   return (
-    <div className="relative pb-[68px] md:pb-0">
-      <Navbar
-        announcement={data.store.announcement}
-        whatsapp={data.whatsapp}
-      />
-
-      <Hero
-        storeName={data.store.name}
-        slogan={data.store.slogan}
-        whatsapp={data.whatsapp}
-      />
-
-      <CategoriesSection categories={data.categories} onSelect={selectCategory} />
-
-      {data.promotions.length > 0 && (
-        <PromotionsSection promotions={data.promotions} onSelectCategory={selectCategory} />
-      )}
-
-      {featured.length > 0 && (
-        <FeaturedCarousel
-          products={featured}
-          categories={data.categories}
-          onView={openProduct}
+    <CartProvider>
+      <div className="relative pb-[68px] md:pb-0">
+        <Navbar
+          announcement={data.store.announcement}
+          whatsapp={data.whatsapp}
         />
-      )}
 
-      <ProductGrid
-        products={data.products}
-        categories={data.categories}
-        activeCategory={activeCategory}
-        onSelectCategory={setActiveCategory}
-        onView={openProduct}
-      />
+        <Hero
+          storeName={data.store.name}
+          slogan={data.store.slogan}
+          whatsapp={data.whatsapp}
+        />
 
-      <Footer data={data} />
+        <CategoriesSection categories={data.categories} onSelect={selectCategory} />
 
-      <AnimatePresence>
-        {activeProduct && (
-          <ProductModal
-            key={activeProduct.id}
-            product={activeProduct}
-            category={data.categories.find(
-              (c) => c.id === activeProduct.categoryId
-            )}
-            whatsappNumber={data.whatsapp.number}
-            onClose={() => setActiveProduct(null)}
+        {data.promotions.length > 0 && (
+          <PromotionsSection promotions={data.promotions} onSelectCategory={selectCategory} />
+        )}
+
+        {featured.length > 0 && (
+          <FeaturedCarousel
+            products={featured}
+            categories={data.categories}
+            onView={openProduct}
           />
         )}
-      </AnimatePresence>
 
-      <WhatsappFloat
-        number={data.whatsapp.number}
-        message={data.whatsapp.message}
-      />
+        <ProductGrid
+          products={data.products}
+          categories={data.categories}
+          activeCategory={activeCategory}
+          onSelectCategory={setActiveCategory}
+          onView={openProduct}
+        />
 
-      <MobileNav whatsapp={data.whatsapp} />
+        <Footer data={data} />
 
-      <InstallBanner />
-    </div>
+        <AnimatePresence>
+          {activeProduct && (
+            <ProductModal
+              key={activeProduct.id}
+              product={activeProduct}
+              category={data.categories.find(
+                (c) => c.id === activeProduct.categoryId
+              )}
+              whatsappNumber={data.whatsapp.number}
+              onClose={() => setActiveProduct(null)}
+            />
+          )}
+        </AnimatePresence>
+
+        <WhatsappFloat
+          number={data.whatsapp.number}
+          message={data.whatsapp.message}
+        />
+
+        <MobileNav whatsapp={data.whatsapp} />
+
+        <InstallBanner />
+
+        <CartDrawer
+          storeName={data.store.name}
+          whatsapp={data.whatsapp}
+          paymentMethods={paymentMethods}
+          shippingNote={data.store.shippingNote}
+        />
+      </div>
+    </CartProvider>
   );
 }

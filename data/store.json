@@ -6,7 +6,12 @@
     "description": "Tu tienda de camisas de fútbol y perfumes. Calidad, originalidad y los mejores precios para que luzcas increíble.",
     "instagram": "alex.store",
     "tiktok": "alex.store",
-    "email": "ventas@alexstore.com"
+    "email": "ventas@alexstore.com",
+    "paymentMethods": [
+      "Transferencia",
+      "Efectivo"
+    ],
+    "shippingNote": "Envíos a todo el país. Al confirmar tu pedido te compartimos los datos de pago."
   },
   "whatsapp": {
     "number": "+521234567890",

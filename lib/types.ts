@@ -6,6 +6,8 @@ export interface StoreSettings {
   instagram?: string;
   tiktok?: string;
   email?: string;
+  paymentMethods?: string[];
+  shippingNote?: string;
 }
 
 export interface WhatsAppSettings {

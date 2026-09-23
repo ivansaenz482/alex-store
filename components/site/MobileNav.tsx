@@ -1,12 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Home, FolderTree, Flame, LayoutGrid, MessageCircle } from "lucide-react";
+import { Home, FolderTree, LayoutGrid, ShoppingBag, MessageCircle } from "lucide-react";
+import { useCart } from "./CartContext";
 import { cn, whatsappLink } from "@/lib/utils";
 
 const items = [
   { id: "inicio", label: "Inicio", icon: Home },
   { id: "categorias", label: "Categorías", icon: FolderTree },
-  { id: "destacados", label: "Top", icon: Flame },
   { id: "catalogo", label: "Catálogo", icon: LayoutGrid },
 ];
 
@@ -16,6 +16,7 @@ export function MobileNav({
   whatsapp: { number: string; message: string };
 }) {
   const [active, setActive] = useState("inicio");
+  const { count, setOpen } = useCart();
 
   useEffect(() => {
     const sections = items
@@ -66,6 +67,21 @@ export function MobileNav({
             </a>
           );
         })}
+
+        <button
+          onClick={() => setOpen(true)}
+          className="relative flex flex-1 flex-col items-center gap-1 rounded-xl px-1 py-1.5 text-[10px] font-semibold text-white/55"
+        >
+          <span className="relative flex h-5 items-center">
+            <ShoppingBag size={20} />
+            {count > 0 && (
+              <span className="absolute -right-2.5 -top-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-volt px-1 text-[9px] font-extrabold text-background">
+                {count}
+              </span>
+            )}
+          </span>
+          Carrito
+        </button>
 
         <a
           href={whatsappLink(whatsapp.number, whatsapp.message)}
