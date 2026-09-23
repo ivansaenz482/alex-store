@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Sora } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { ServiceWorkerRegister } from "@/components/site/ServiceWorkerRegister";
 
@@ -54,6 +55,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        <Script id="pwa-install-capture" strategy="beforeInteractive">
+          {`window.__pwaPrompt=null;window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();window.__pwaPrompt=e;window.dispatchEvent(new Event("pwa-installable"));});window.addEventListener("appinstalled",function(){window.__pwaPrompt=null;window.dispatchEvent(new Event("pwa-installed"));});`}
+        </Script>
         {children}
         <ServiceWorkerRegister />
       </body>

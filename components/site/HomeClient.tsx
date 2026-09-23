@@ -11,6 +11,7 @@ import { ProductGrid } from "./ProductGrid";
 import { ProductModal } from "./ProductModal";
 import { WhatsappFloat } from "./WhatsappFloat";
 import { MobileNav } from "./MobileNav";
+import { InstallBanner } from "./InstallBanner";
 import { Footer } from "./Footer";
 
 export function HomeClient({ data }: { data: StoreData }) {
@@ -107,6 +108,8 @@ export function HomeClient({ data }: { data: StoreData }) {
       />
 
       <MobileNav whatsapp={data.whatsapp} />
+
+      <InstallBanner />
     </div>
   );
 }
