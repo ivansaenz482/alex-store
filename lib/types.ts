@@ -22,6 +22,7 @@ export interface Category {
   image: string;
   accent: string;
   description: string;
+  subcategories?: string[];
 }
 
 export interface Promotion {
@@ -41,6 +42,7 @@ export interface Product {
   id: string;
   name: string;
   categoryId: string;
+  subcategory?: string;
   price: number;
   originalPrice?: number;
   currency: string;

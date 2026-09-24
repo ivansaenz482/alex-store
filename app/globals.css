@@ -147,8 +147,8 @@ body {
 
 .glass {
   background: rgba(255, 255, 255, 0.035);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .no-scrollbar::-webkit-scrollbar {

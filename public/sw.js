@@ -1,4 +1,4 @@
-const CACHE = "alexstore-pwa-v2";
+const CACHE = "alexstore-pwa-v3";
 const OFFLINE_URL = "/";
 const PRECACHE = [
   "/",
@@ -27,11 +27,47 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-function isCacheable(url) {
-  if (url.origin !== self.location.origin) return false;
-  if (url.pathname.startsWith("/api/")) return false;
-  if (url.pathname.startsWith("/admin")) return false;
-  return true;
+function isStaticAsset(url) {
+  if (url.pathname.startsWith("/_next/static/")) return true;
+  if (url.pathname.startsWith("/_next/image")) return true;
+  if (url.pathname.startsWith("/demo/")) return true;
+  if (url.pathname.startsWith("/uploads/")) return true;
+  return /\.(?:js|css|woff2?|ttf|otf|png|jpe?g|webp|avif|gif|svg|ico)$/i.test(
+    url.pathname
+  );
+}
+
+function shouldIgnore(url) {
+  if (url.origin !== self.location.origin) return true;
+  if (url.pathname.startsWith("/api/")) return true;
+  if (url.pathname.startsWith("/admin")) return true;
+  return false;
+}
+
+async function cacheFirst(request) {
+  const cached = await caches.match(request);
+  if (cached) {
+    fetch(request)
+      .then((response) => {
+        if (response && response.ok) {
+          caches
+            .open(CACHE)
+            .then((cache) => cache.put(request, response.clone()))
+            .catch(() => undefined);
+        }
+      })
+      .catch(() => undefined);
+    return cached;
+  }
+  const response = await fetch(request);
+  if (response && response.ok) {
+    const copy = response.clone();
+    caches
+      .open(CACHE)
+      .then((cache) => cache.put(request, copy))
+      .catch(() => undefined);
+  }
+  return response;
 }
 
 self.addEventListener("fetch", (event) => {
@@ -39,8 +75,15 @@ self.addEventListener("fetch", (event) => {
   if (request.method !== "GET") return;
 
   const url = new URL(request.url);
-  if (!isCacheable(url)) return;
+  if (shouldIgnore(url)) return;
 
+  // Recursos estáticos (JS, CSS, fuentes, imágenes): primero caché = app rápida.
+  if (isStaticAsset(url)) {
+    event.respondWith(cacheFirst(request));
+    return;
+  }
+
+  // Navegación y datos: primero red, con respaldo en caché (offline).
   event.respondWith(
     fetch(request)
       .then((response) => {

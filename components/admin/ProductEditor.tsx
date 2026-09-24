@@ -166,7 +166,11 @@ export function ProductEditor({ products, categories, onChange }: Props) {
                   <Select
                     value={editing.categoryId}
                     onChange={(e) =>
-                      setEditing({ ...editing, categoryId: e.target.value })
+                      setEditing({
+                        ...editing,
+                        categoryId: e.target.value,
+                        subcategory: undefined,
+                      })
                     }
                   >
                     {categories.map((c) => (
@@ -186,6 +190,36 @@ export function ProductEditor({ products, categories, onChange }: Props) {
                   />
                 </Field>
               </div>
+
+              {(categories.find((c) => c.id === editing.categoryId)?.subcategories
+                ?.length ?? 0) > 0 && (
+                <Field
+                  label="Subcategoría"
+                  hint="Clasifica el producto dentro de la categoría."
+                >
+                  <Select
+                    value={editing.subcategory ?? ""}
+                    onChange={(e) =>
+                      setEditing({
+                        ...editing,
+                        subcategory: e.target.value || undefined,
+                      })
+                    }
+                  >
+                    <option value="" className="bg-surface">
+                      Sin subcategoría
+                    </option>
+                    {(
+                      categories.find((c) => c.id === editing.categoryId)
+                        ?.subcategories ?? []
+                    ).map((s) => (
+                      <option key={s} value={s} className="bg-surface">
+                        {s}
+                      </option>
+                    ))}
+                  </Select>
+                </Field>
+              )}
 
               <div className="grid grid-cols-3 gap-4">
                 <Field label="Precio">

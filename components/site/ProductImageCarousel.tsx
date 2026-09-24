@@ -6,6 +6,18 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ProductImage } from "./ProductImage";
 import { cn } from "@/lib/utils";
 
+const HOVER_ZOOM = "transition-transform duration-700 group-hover:scale-105";
+
+interface Props {
+  images: string[];
+  alt: string;
+  emoji: string;
+  aspect?: string;
+  showControls?: boolean;
+  fit?: "contain" | "cover";
+  autoplay?: boolean;
+}
+
 export function ProductImageCarousel({
   images,
   alt,
@@ -13,57 +25,94 @@ export function ProductImageCarousel({
   aspect = "aspect-square",
   showControls = true,
   fit = "contain",
+  autoplay = true,
+}: Props) {
+  // Optimización: con 0 o 1 imagen NO montamos Embla (ni autoplay).
+  // La mayoría de productos tienen 1 foto, así evitamos decenas de carruseles.
+  if (images.length <= 1) {
+    return (
+      <div className={cn("relative", aspect)}>
+        <ProductImage
+          src={images[0]}
+          alt={alt}
+          emoji={emoji}
+          fit={fit}
+          className="h-full w-full"
+          imgClassName={HOVER_ZOOM}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <MultiImageCarousel
+      images={images}
+      alt={alt}
+      emoji={emoji}
+      aspect={aspect}
+      showControls={showControls}
+      fit={fit}
+      autoplay={autoplay}
+    />
+  );
+}
+
+function MultiImageCarousel({
+  images,
+  alt,
+  emoji,
+  aspect,
+  showControls,
+  fit,
+  autoplay,
 }: {
   images: string[];
   alt: string;
   emoji: string;
-  aspect?: string;
-  showControls?: boolean;
-  fit?: "contain" | "cover";
+  aspect: string;
+  showControls: boolean;
+  fit: "contain" | "cover";
+  autoplay: boolean;
 }) {
-  const slides = images.length ? images : [""];
-  const isPlaceholder = images.length === 0;
-
-  const autoplay = useCallback(
-    () =>
-      Autoplay({
-        delay: 3200,
-        stopOnInteraction: !isPlaceholder,
-        stopOnMouseEnter: true,
-      }),
-    [isPlaceholder]
+  const autoplayPlugin = useCallback(
+    () => Autoplay({ delay: 3600, stopOnInteraction: true, stopOnMouseEnter: true }),
+    []
   );
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: slides.length > 1 }, [
-    autoplay(),
-  ]);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, autoplay ? [autoplayPlugin()] : []);
   const [selected, setSelected] = useState(0);
 
   useEffect(() => {
     if (!emblaApi) return;
-    emblaApi.on("select", () => setSelected(emblaApi.selectedScrollSnap()));
+    const onSelect = () => setSelected(emblaApi.selectedScrollSnap());
+    emblaApi.on("select", onSelect);
+    const raf = requestAnimationFrame(() => setSelected(emblaApi.selectedScrollSnap()));
+    return () => {
+      cancelAnimationFrame(raf);
+      emblaApi.off("select", onSelect);
+    };
   }, [emblaApi]);
 
   return (
     <div className="relative">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex touch-pan-y">
-          {slides.map((src, i) => (
+          {images.map((src, i) => (
             <div className="embla__slide" key={i}>
               <ProductImage
-                src={isPlaceholder ? undefined : src}
+                src={src}
                 alt={alt}
                 emoji={emoji}
                 fit={fit}
                 className={cn("w-full", aspect)}
-                imgClassName="transition-transform duration-700 group-hover:scale-105"
+                imgClassName={HOVER_ZOOM}
               />
             </div>
           ))}
         </div>
       </div>
 
-      {showControls && !isPlaceholder && slides.length > 1 && (
+      {showControls && (
         <>
           <button
             onClick={(e) => {
@@ -88,24 +137,22 @@ export function ProductImageCarousel({
         </>
       )}
 
-      {slides.length > 1 && (
-        <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={(e) => {
-                e.stopPropagation();
-                emblaApi?.scrollTo(i);
-              }}
-              className={cn(
-                "h-1.5 rounded-full transition-all",
-                i === selected ? "w-5 bg-volt" : "w-1.5 bg-white/40"
-              )}
-              aria-label={`Imagen ${i + 1}`}
-            />
-          ))}
-        </div>
-      )}
+      <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
+        {images.map((_, i) => (
+          <button
+            key={i}
+            onClick={(e) => {
+              e.stopPropagation();
+              emblaApi?.scrollTo(i);
+            }}
+            className={cn(
+              "h-1.5 rounded-full transition-all",
+              i === selected ? "w-5 bg-volt" : "w-1.5 bg-white/40"
+            )}
+            aria-label={`Imagen ${i + 1}`}
+          />
+        ))}
+      </div>
     </div>
   );
 }

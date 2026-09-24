@@ -1,5 +1,5 @@
 "use client";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import type { Product, Category } from "@/lib/types";
 import { ProductCard } from "./ProductCard";
 import { cn } from "@/lib/utils";
@@ -17,15 +17,24 @@ export function ProductGrid({
   onSelectCategory: (id: string) => void;
   onView: (product: Product) => void;
 }) {
+  const [activeSub, setActiveSub] = useState("todos");
+
   const filters = [
     { id: "todos", name: "Todos", emoji: "✨" },
     ...categories.map((c) => ({ id: c.id, name: c.name, emoji: c.emoji })),
   ];
 
-  const visible =
+  const category = categories.find((c) => c.id === activeCategory);
+  const subcategories = category?.subcategories ?? [];
+  const validSub = subcategories.includes(activeSub) ? activeSub : "todos";
+
+  let visible =
     activeCategory === "todos"
       ? products
       : products.filter((p) => p.categoryId === activeCategory);
+  if (validSub !== "todos") {
+    visible = visible.filter((p) => p.subcategory === validSub);
+  }
 
   return (
     <section id="catalogo" className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
@@ -38,11 +47,14 @@ export function ProductGrid({
         </h2>
       </div>
 
-      <div className="no-scrollbar mb-8 flex gap-2 overflow-x-auto pb-2 sm:mb-10">
+      <div className="no-scrollbar mb-4 flex gap-2 overflow-x-auto pb-2 sm:mb-6">
         {filters.map((f) => (
           <button
             key={f.id}
-            onClick={() => onSelectCategory(f.id)}
+            onClick={() => {
+              onSelectCategory(f.id);
+              setActiveSub("todos");
+            }}
             className={cn(
               "shrink-0 rounded-full border px-5 py-2.5 text-sm font-semibold transition-all",
               activeCategory === f.id
@@ -55,25 +67,44 @@ export function ProductGrid({
         ))}
       </div>
 
+      {subcategories.length > 0 && (
+        <div className="no-scrollbar mb-8 flex items-center gap-2 overflow-x-auto pb-1">
+          <span className="shrink-0 text-xs font-bold uppercase tracking-widest text-white/35">
+            Filtrar:
+          </span>
+          {["todos", ...subcategories].map((sub) => (
+            <button
+              key={sub}
+              onClick={() => setActiveSub(sub)}
+              className={cn(
+                "shrink-0 rounded-full border px-4 py-1.5 text-xs font-semibold transition-all",
+                validSub === sub
+                  ? "border-volt bg-volt/15 text-volt"
+                  : "border-white/12 text-white/60 hover:border-white/30"
+              )}
+            >
+              {sub === "todos" ? "Todas" : sub}
+            </button>
+          ))}
+        </div>
+      )}
+
       {visible.length === 0 ? (
         <p className="py-16 text-center text-white/50">
           No hay productos en esta categoría todavía. Muy pronto...
         </p>
       ) : (
-        <motion.div layout className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-          <AnimatePresence mode="popLayout">
-            {visible.map((p, i) => (
-              <motion.div layout key={p.id} exit={{ opacity: 0, scale: 0.9 }}>
-                <ProductCard
-                  product={p}
-                  category={categories.find((c) => c.id === p.categoryId)}
-                  index={i}
-                  onView={() => onView(p)}
-                />
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+          {visible.map((p, i) => (
+            <ProductCard
+              key={p.id}
+              product={p}
+              category={categories.find((c) => c.id === p.categoryId)}
+              index={i}
+              onView={() => onView(p)}
+            />
+          ))}
+        </div>
       )}
     </section>
   );

@@ -24,7 +24,11 @@
       "emoji": "⚽",
       "image": "/demo/cat-camisas-futbol.svg",
       "accent": "#39ff14",
-      "description": "Camisas de clubes y selecciones, con versiones jugador y de fan."
+      "description": "Camisas de clubes y selecciones, con versiones jugador y de fan.",
+      "subcategories": [
+        "Selecciones",
+        "Clubes"
+      ]
     },
     {
       "id": "perfumes",
@@ -83,6 +87,7 @@
       "id": "camisa-real-madrid-blanca",
       "name": "Camisa Real Madrid 24/25",
       "categoryId": "camisas-futbol",
+      "subcategory": "Clubes",
       "price": 199,
       "originalPrice": 299,
       "currency": "$",
@@ -104,6 +109,7 @@
       "id": "camisa-barcelona-roja",
       "name": "Camisa Barcelona 24/25",
       "categoryId": "camisas-futbol",
+      "subcategory": "Clubes",
       "price": 199,
       "originalPrice": 279,
       "currency": "$",
@@ -126,6 +132,7 @@
       "id": "camisa-seleccion-mexico",
       "name": "Camisa Selección México 2026",
       "categoryId": "camisas-futbol",
+      "subcategory": "Selecciones",
       "price": 229,
       "originalPrice": 329,
       "currency": "$",

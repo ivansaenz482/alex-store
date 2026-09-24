@@ -20,9 +20,8 @@ export function Hero({
       className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 pb-24 pt-32"
     >
       <div className="grid-bg pointer-events-none absolute inset-0 opacity-70" />
-      <div className="pointer-events-none absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-volt/20 blur-[130px]" />
-      <div className="pointer-events-none absolute bottom-10 right-10 h-96 w-96 rounded-full bg-aqua/20 blur-[130px]" />
-      <div className="pointer-events-none absolute right-1/4 top-1/2 h-72 w-72 rounded-full bg-volt/20 blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/4 top-1/4 h-80 w-80 rounded-full bg-volt/20 blur-[90px]" />
+      <div className="pointer-events-none absolute bottom-10 right-10 h-80 w-80 rounded-full bg-aqua/20 blur-[90px]" />
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}

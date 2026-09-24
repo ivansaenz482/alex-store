@@ -146,6 +146,25 @@ export function CategoryEditor({ categories, onChange, onDeleteProductsFor }: Pr
                 />
               </Field>
 
+              <Field
+                label="Subcategorías (opcional)"
+                hint="Sepáralas con comas. Sirven para filtrar dentro de la categoría (ej. Selecciones, Clubes)."
+              >
+                <TextInput
+                  value={(editing.subcategories ?? []).join(", ")}
+                  onChange={(e) =>
+                    setEditing({
+                      ...editing,
+                      subcategories: e.target.value
+                        .split(",")
+                        .map((s) => s.trim())
+                        .filter(Boolean),
+                    })
+                  }
+                  placeholder="Selecciones, Clubes"
+                />
+              </Field>
+
               <Field label="Color de acento" hint="Color de la categoría en la tienda.">
                 <div className="flex items-center gap-3">
                   <input

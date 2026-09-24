@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import type { Product, Category } from "@/lib/types";
 import { ProductImageCarousel } from "./ProductImageCarousel";
-import { Badge } from "./ui";
 import { cn, formatPrice } from "@/lib/utils";
 
 export function FeaturedCarousel({
@@ -62,7 +61,7 @@ export function FeaturedCarousel({
       id="destacados"
       className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20"
     >
-      <div className="pointer-events-none absolute left-1/4 top-1/3 h-64 w-64 rounded-full bg-volt/10 blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/4 top-1/3 h-64 w-64 rounded-full bg-volt/10 blur-[90px]" />
 
       <div className="relative mb-8 flex items-end justify-between gap-4 sm:mb-10">
         <div>
@@ -130,26 +129,27 @@ export function FeaturedCarousel({
                         emoji={cat?.emoji ?? "🛍️"}
                         aspect="aspect-[4/5]"
                         showControls={false}
+                        autoplay={false}
                       />
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent" />
-                      <div className="absolute left-2.5 top-2.5 flex flex-col gap-1.5">
-                        {discount > 0 && (
-                          <Badge className="border-volt bg-volt px-2.5 py-0.5 text-[10px] text-background">
-                            -{discount}%
-                          </Badge>
-                        )}
-                        {p.badge && (
-                          <Badge className="border-white/20 bg-background/70 px-2.5 py-0.5 text-[10px]">
-                            {p.badge}
-                          </Badge>
-                        )}
-                      </div>
+                      {discount > 0 && (
+                        <span className="absolute left-2.5 top-2.5 rounded-full bg-volt px-2 py-0.5 text-[10px] font-extrabold text-background shadow-md">
+                          -{discount}%
+                        </span>
+                      )}
                     </div>
 
                     <div className="flex flex-1 flex-col p-4">
-                      <p className="text-[10px] uppercase tracking-widest text-white/40">
-                        {cat?.name ?? "Producto"}
-                      </p>
+                      <div className="flex items-center gap-2">
+                        <p className="text-[10px] uppercase tracking-widest text-white/40">
+                          {cat?.name ?? "Producto"}
+                        </p>
+                        {p.badge && (
+                          <span className="truncate rounded-full border border-volt/40 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide text-volt">
+                            {p.badge}
+                          </span>
+                        )}
+                      </div>
                       <h3 className="mt-1 line-clamp-2 text-sm font-bold leading-snug">
                         {p.name}
                       </h3>
