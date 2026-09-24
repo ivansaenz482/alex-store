@@ -23,7 +23,7 @@ Abre [http://localhost:3000](http://localhost:3000).
 La tienda es una **Progressive Web App**: se puede **instalar como app** en celular, tablet o PC (sin tiendas de aplicaciones) y funciona aunque no haya internet.
 
 - 📄 Manifest: `app/manifest.ts` → `/manifest.webmanifest`
-- 🖼️ Iconos (generados como PNG): `/api/pwa-icon?size=192`, `?size=512` y `?size=512&maskable=1`
+- 🖼️ Iconos (logo de la app): `public/icons/icon-192.png`, `icon-512.png` y `icon-maskable-512.png`
 - ⚙️ Service worker (offline + caché): `public/sw.js`
 - 🔘 Botón **“Instalar app”** en la barra de navegación (en iOS muestra los pasos de Safari).
 

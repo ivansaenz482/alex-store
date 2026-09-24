@@ -58,8 +58,13 @@ export function InstallBanner() {
             <div className="relative flex items-center gap-3 overflow-hidden rounded-2xl border border-volt/25 bg-surface/95 p-3.5 shadow-[0_20px_60px_-20px_rgba(57,255,20,0.55)] backdrop-blur-xl">
               <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-volt/20 blur-2xl" />
 
-              <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-volt/30 bg-volt/10 text-volt">
-                <Download size={20} />
+              <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-xl border border-volt/30 bg-volt/10">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/icons/icon-192.png"
+                  alt="ALEX.STORE"
+                  className="h-full w-full object-cover"
+                />
               </span>
 
               <div className="relative min-w-0 flex-1">

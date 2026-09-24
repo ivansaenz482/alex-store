@@ -19,19 +19,19 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ["shopping", "lifestyle"],
     icons: [
       {
-        src: "/api/pwa-icon?size=192",
+        src: "/icons/icon-192.png",
         sizes: "192x192",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/api/pwa-icon?size=512",
+        src: "/icons/icon-512.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/api/pwa-icon?size=512&maskable=1",
+        src: "/icons/icon-maskable-512.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "maskable",
@@ -44,7 +44,7 @@ export default function manifest(): MetadataRoute.Manifest {
         description: "Explora camisas de fútbol, perfumes y accesorios",
         url: "/#catalogo",
         icons: [
-          { src: "/api/pwa-icon?size=192", sizes: "192x192", type: "image/png" },
+          { src: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
         ],
       },
       {
@@ -53,7 +53,7 @@ export default function manifest(): MetadataRoute.Manifest {
         description: "Administra productos, categorías y promociones",
         url: "/admin",
         icons: [
-          { src: "/api/pwa-icon?size=192", sizes: "192x192", type: "image/png" },
+          { src: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
         ],
       },
     ],

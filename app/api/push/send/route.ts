@@ -42,8 +42,8 @@ export async function POST(request: NextRequest) {
       title,
       body: message,
       url,
-      icon: "/api/pwa-icon?size=192",
-      badge: "/api/pwa-icon?size=96",
+      icon: "/icons/icon-192.png",
+      badge: "/icons/icon-96.png",
     });
     return Response.json({ ok: true, ...result });
   } catch (error) {

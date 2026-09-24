@@ -1,10 +1,10 @@
-const CACHE = "alexstore-pwa-v3";
+const CACHE = "alexstore-pwa-v4";
 const OFFLINE_URL = "/";
 const PRECACHE = [
   "/",
   "/manifest.webmanifest",
-  "/api/pwa-icon?size=192",
-  "/api/pwa-icon?size=512",
+  "/icons/icon-192.png",
+  "/icons/icon-512.png",
 ];
 
 self.addEventListener("install", (event) => {
@@ -120,8 +120,8 @@ self.addEventListener("push", (event) => {
   event.waitUntil(
     self.registration.showNotification(data.title, {
       body: data.body,
-      icon: data.icon || "/api/pwa-icon?size=192",
-      badge: data.badge || "/api/pwa-icon?size=96",
+      icon: data.icon || "/icons/icon-192.png",
+      badge: data.badge || "/icons/icon-96.png",
       data: { url: data.url || "/" },
       vibrate: [80, 40, 80],
       tag: "alexstore-promo",
