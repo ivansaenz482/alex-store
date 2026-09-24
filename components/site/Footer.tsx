@@ -1,8 +1,10 @@
 "use client";
-import { Music2, Mail, ShieldCheck, Truck, BadgeCheck, MessageCircle } from "lucide-react";
+import { Music2, Mail, ShieldCheck, Truck, BadgeCheck, MessageCircle, ArrowUpRight } from "lucide-react";
 import type { StoreData } from "@/lib/types";
 import { whatsappLink } from "@/lib/utils";
 import { PushButton } from "./PushButton";
+import { ShareQr } from "./ShareQr";
+import { Button } from "./ui";
 
 function InstagramIcon({ size = 18 }: { size?: number }) {
   return (
@@ -114,6 +116,42 @@ export function Footer({ data }: { data: StoreData }) {
             <div className="mt-4">
               <PushButton />
             </div>
+          </div>
+        </div>
+
+        <div className="mt-12 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-3xl border border-white/8 bg-background/40 p-6">
+            <p className="text-xs font-bold uppercase tracking-widest text-volt">
+              Comparte
+            </p>
+            <p className="mt-2 text-lg font-extrabold">Comparte esta tienda</p>
+            <p className="mt-1 text-sm text-white/55">
+              Descarga el QR para imprimir o comparte el enlace con tus clientes.
+            </p>
+            <div className="mt-4">
+              <ShareQr storeName={store.name} />
+            </div>
+          </div>
+
+          <div className="relative overflow-hidden rounded-3xl border border-volt/20 bg-volt/5 p-6">
+            <div className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-volt/20 blur-2xl" />
+            <p className="relative text-xs font-bold uppercase tracking-widest text-volt">
+              Desarrollador
+            </p>
+            <p className="relative mt-2 text-lg font-extrabold">Ivan Tenet</p>
+            <p className="relative mt-1 text-sm text-white/55">
+              Creador de esta tienda y de otras páginas web.
+            </p>
+            <a
+              href="https://ivansaenz482.github.io/ivan-teneta-web/"
+              target="_blank"
+              rel="noreferrer"
+              className="relative mt-4 inline-block"
+            >
+              <Button variant="volt" className="px-5 py-2.5 text-xs">
+                Ver mi portafolio <ArrowUpRight size={15} />
+              </Button>
+            </a>
           </div>
         </div>
 

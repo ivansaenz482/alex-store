@@ -105,7 +105,7 @@ export function FeaturedCarousel({
               return (
                 <div
                   key={p.id}
-                  className="embla__slide mr-3 flex-[0_0_64%] sm:mr-4 sm:flex-[0_0_42%] md:flex-[0_0_31%] lg:flex-[0_0_23.5%]"
+                  className="embla__slide mr-3 flex-[0_0_66%] sm:mr-4 sm:flex-[0_0_32%] md:flex-[0_0_24%] lg:flex-[0_0_19%]"
                 >
                   <motion.div
                     role="button"
@@ -126,7 +126,7 @@ export function FeaturedCarousel({
                       <ProductImageCarousel
                         images={p.images}
                         alt={p.name}
-                        aspect="aspect-[4/5]"
+                        aspect="aspect-[4/5] sm:aspect-square"
                         showControls={false}
                         autoplay={false}
                       />
