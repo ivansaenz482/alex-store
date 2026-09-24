@@ -1,5 +1,5 @@
 "use client";
-import { Music2, Mail, ShieldCheck, Truck, BadgeCheck } from "lucide-react";
+import { Music2, Mail, ShieldCheck, Truck, BadgeCheck, MessageCircle } from "lucide-react";
 import type { StoreData } from "@/lib/types";
 import { whatsappLink } from "@/lib/utils";
 import { PushButton } from "./PushButton";
@@ -106,7 +106,7 @@ export function Footer({ data }: { data: StoreData }) {
               rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-[#25D366]/15 px-4 py-2.5 text-sm font-semibold text-[#25D366]"
             >
-              📲 WhatsApp: {whatsapp.number}
+              <MessageCircle size={16} /> WhatsApp: {whatsapp.number}
             </a>
             {store.email && (
               <p className="mt-3 text-sm text-white/55">{store.email}</p>

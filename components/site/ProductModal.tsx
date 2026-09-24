@@ -23,17 +23,17 @@ export function ProductModal({
   const { add } = useCart();
 
   if (!product) return null;
-  const cat = category ?? { emoji: "🛍️", name: "Producto" };
+  const cat = category ?? { name: "Producto" };
 
   const discount =
     product.originalPrice && product.originalPrice > product.price
       ? Math.round((1 - product.price / product.originalPrice) * 100)
       : 0;
 
-  const orderMessage = `Hola ALEX.STORE 👋, quiero pedir:\n\n🛒 *${product.name}*\n${formatPrice(
+  const orderMessage = `Hola ALEX.STORE, quiero pedir:\n\n*${product.name}*\n${formatPrice(
     product.price,
     product.currency
-  )}${size ? `\n📏 Talla: ${size}` : ""}\n\n¿Me confirman disponibilidad?`;
+  )}${size ? `\nTalla: ${size}` : ""}\n\n¿Me confirman disponibilidad?`;
 
   function addToCart() {
     if (!product) return;
@@ -79,7 +79,6 @@ export function ProductModal({
               <ProductImageCarousel
                 images={product.images}
                 alt={product.name}
-                emoji={cat.emoji}
                 aspect="aspect-[4/3] sm:aspect-square"
               />
             </div>

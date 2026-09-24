@@ -20,8 +20,8 @@ export function ProductGrid({
   const [activeSub, setActiveSub] = useState("todos");
 
   const filters = [
-    { id: "todos", name: "Todos", emoji: "✨" },
-    ...categories.map((c) => ({ id: c.id, name: c.name, emoji: c.emoji })),
+    { id: "todos", name: "Todos" },
+    ...categories.map((c) => ({ id: c.id, name: c.name })),
   ];
 
   const category = categories.find((c) => c.id === activeCategory);
@@ -62,7 +62,7 @@ export function ProductGrid({
                 : "border-white/12 bg-white/5 text-white/70 hover:border-white/30"
             )}
           >
-            {f.emoji} {f.name}
+            {f.name}
           </button>
         ))}
       </div>

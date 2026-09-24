@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, MessageCircle } from "lucide-react";
 import { Button } from "./ui";
 import { Marquee } from "./Marquee";
 import { whatsappLink } from "@/lib/utils";
@@ -56,7 +56,7 @@ export function Hero({
             rel="noreferrer"
           >
             <Button variant="outline" className="w-full sm:w-auto">
-              📲 Pedir por WhatsApp
+              <MessageCircle size={16} /> Pedir por WhatsApp
             </Button>
           </a>
         </div>

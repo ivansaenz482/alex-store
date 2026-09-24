@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Pencil, Trash2, X, Star } from "lucide-react";
+import { Plus, Pencil, Trash2, X, Star, ShoppingBag } from "lucide-react";
 import type { Product, Category } from "@/lib/types";
 import { Field, TextInput, TextArea, Select } from "./fields";
 import { ImageUploader } from "./ImageUploader";
@@ -92,8 +92,8 @@ export function ProductEditor({ products, categories, onChange }: Props) {
                   className="h-full w-full object-contain p-1"
                 />
               ) : (
-                <div className="flex h-full w-full items-center justify-center text-2xl">
-                  🛍️
+                <div className="flex h-full w-full items-center justify-center text-white/25">
+                  <ShoppingBag size={22} strokeWidth={1.5} />
                 </div>
               )}
             </div>
@@ -108,7 +108,7 @@ export function ProductEditor({ products, categories, onChange }: Props) {
                 {formatPrice(p.price, p.currency)}
               </p>
               <p className="text-xs text-white/40">
-                {p.featured ? "⭐ Destacado" : p.inStock ? "En stock" : "Agotado"}
+                {p.featured ? "Destacado" : p.inStock ? "En stock" : "Agotado"}
               </p>
             </div>
             <div className="flex gap-2">

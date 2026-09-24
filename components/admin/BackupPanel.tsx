@@ -78,7 +78,7 @@ export function BackupPanel() {
               restablecer productos, fotos y estadísticas.
             </p>
             <p className="mt-2 text-xs text-amber-300/80">
-              ⚠️ Reemplazará el contenido actual de la tienda.
+              Reemplazará el contenido actual de la tienda.
             </p>
           </div>
           <Button

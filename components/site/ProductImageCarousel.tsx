@@ -11,7 +11,6 @@ const HOVER_ZOOM = "transition-transform duration-700 group-hover:scale-105";
 interface Props {
   images: string[];
   alt: string;
-  emoji: string;
   aspect?: string;
   showControls?: boolean;
   fit?: "contain" | "cover";
@@ -21,7 +20,6 @@ interface Props {
 export function ProductImageCarousel({
   images,
   alt,
-  emoji,
   aspect = "aspect-square",
   showControls = true,
   fit = "contain",
@@ -35,7 +33,6 @@ export function ProductImageCarousel({
         <ProductImage
           src={images[0]}
           alt={alt}
-          emoji={emoji}
           fit={fit}
           className="h-full w-full"
           imgClassName={HOVER_ZOOM}
@@ -48,7 +45,6 @@ export function ProductImageCarousel({
     <MultiImageCarousel
       images={images}
       alt={alt}
-      emoji={emoji}
       aspect={aspect}
       showControls={showControls}
       fit={fit}
@@ -60,7 +56,6 @@ export function ProductImageCarousel({
 function MultiImageCarousel({
   images,
   alt,
-  emoji,
   aspect,
   showControls,
   fit,
@@ -68,7 +63,6 @@ function MultiImageCarousel({
 }: {
   images: string[];
   alt: string;
-  emoji: string;
   aspect: string;
   showControls: boolean;
   fit: "contain" | "cover";
@@ -102,7 +96,6 @@ function MultiImageCarousel({
               <ProductImage
                 src={src}
                 alt={alt}
-                emoji={emoji}
                 fit={fit}
                 className={cn("w-full", aspect)}
                 imgClassName={HOVER_ZOOM}

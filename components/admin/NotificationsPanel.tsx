@@ -36,11 +36,11 @@ export function NotificationsPanel() {
     });
     const data = await res.json().catch(() => ({}));
     if (res.ok) {
-      setMessage(`✅ Enviada a ${data.sent ?? 0} dispositivo(s)`);
+      setMessage(`Enviada a ${data.sent ?? 0} dispositivo(s)`);
       setTitle("");
       setBody("");
     } else {
-      setMessage(`⚠️ ${data.error ?? "No se pudo enviar"}`);
+      setMessage(`${data.error ?? "No se pudo enviar"}`);
     }
     setSending(false);
   }
@@ -71,7 +71,7 @@ export function NotificationsPanel() {
           <TextInput
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="🔥 Nuevos ingresos en ALEX.STORE"
+            placeholder="Nuevos ingresos en ALEX.STORE"
           />
         </Field>
 

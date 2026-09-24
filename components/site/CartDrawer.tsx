@@ -61,17 +61,17 @@ export function CartDrawer({
   });
 
   const message = [
-    `Hola ${storeName} 👋, quiero hacer este pedido:`,
+    `Hola ${storeName}, quiero hacer este pedido:`,
     "",
-    "🛒 *Pedido*",
+    "*Pedido*",
     ...orderLines,
     "",
     `Subtotal: ${formatPrice(subtotal, currency)}`,
     "",
-    `👤 Nombre: ${name.trim() || "—"}`,
-    phone.trim() ? `📞 Teléfono: ${phone.trim()}` : null,
-    `💳 Pago: ${method}`,
-    notes.trim() ? `📝 Notas: ${notes.trim()}` : null,
+    `Nombre: ${name.trim() || "—"}`,
+    phone.trim() ? `Teléfono: ${phone.trim()}` : null,
+    `Pago: ${method}`,
+    notes.trim() ? `Notas: ${notes.trim()}` : null,
     "",
     "¿Me confirman disponibilidad y datos de pago? ¡Gracias!",
   ]
@@ -141,7 +141,7 @@ export function CartDrawer({
             <div className="flex-1 overflow-y-auto px-5 py-4">
               {items.length === 0 ? (
                 <div className="flex h-full flex-col items-center justify-center gap-3 py-16 text-center">
-                  <span className="text-5xl">🛒</span>
+                  <ShoppingBag size={44} className="text-white/25" strokeWidth={1.4} />
                   <p className="font-bold">Tu carrito está vacío</p>
                   <p className="text-sm text-white/50">
                     Agrega productos y arma tu pedido.
@@ -174,8 +174,8 @@ export function CartDrawer({
                             className="h-full w-full object-contain p-1"
                           />
                         ) : (
-                          <div className="flex h-full w-full items-center justify-center text-xl">
-                            🛍️
+                          <div className="flex h-full w-full items-center justify-center text-white/25">
+                            <ShoppingBag size={20} strokeWidth={1.6} />
                           </div>
                         )}
                       </div>

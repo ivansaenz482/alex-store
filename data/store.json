@@ -21,7 +21,6 @@
     {
       "id": "camisas-futbol",
       "name": "Camisas de Fútbol",
-      "emoji": "⚽",
       "image": "/demo/cat-camisas-futbol.svg",
       "accent": "#39ff14",
       "description": "Camisas de clubes y selecciones, con versiones jugador y de fan.",
@@ -33,7 +32,6 @@
     {
       "id": "perfumes",
       "name": "Perfumes",
-      "emoji": "🧴",
       "image": "/demo/cat-perfumes.svg",
       "accent": "#00ffb3",
       "description": "Fragancias y perfumería de lujo para hacerte notar."
@@ -41,7 +39,6 @@
     {
       "id": "accesorios",
       "name": "Accesorios",
-      "emoji": "🧢",
       "image": "/demo/cat-accesorios.svg",
       "accent": "#86ff00",
       "description": "Gorras, medias y complementos para completar tu look."
@@ -52,7 +49,6 @@
       "id": "promo-mundial",
       "title": "Edición Mundial 2026",
       "description": "Llévate la camisa de tu selección con un descuento exclusivo y envío gratis.",
-      "emoji": "🏆",
       "color": "#39ff14",
       "discount": 20,
       "badge": "Temporada",
@@ -63,7 +59,6 @@
       "id": "promo-perfumeria",
       "title": "Piramide de Fragancias",
       "description": "Descubre los perfumes más pedidos y déjate llevar por notas de lujo.",
-      "emoji": "✨",
       "color": "#00ffb3",
       "discount": 15,
       "badge": "Lujo",
@@ -74,7 +69,6 @@
       "id": "promo-combo",
       "title": "Combo Camisa + Perfume",
       "description": "Arma tu combo perfecto: una camisa y un perfume con precio de amigo.",
-      "emoji": "🎁",
       "color": "#86ff00",
       "discount": 25,
       "badge": "Combo",

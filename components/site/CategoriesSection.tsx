@@ -49,17 +49,16 @@ export function CategoriesSection({
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface/85 via-surface/10 to-transparent" />
               </div>
             )}
-            <div className="relative flex items-center justify-between">
-              <span className={cat.image ? "text-3xl" : "text-5xl"}>{cat.emoji}</span>
-              <ArrowUpRight className="text-white/40 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white" />
-            </div>
-            <div className="relative mt-5">
-              <h3 className="text-xl font-bold">{cat.name}</h3>
-              <p className="mt-1 text-sm text-white/60">{cat.description}</p>
-              <span
-                className="mt-4 inline-block h-1 w-10 rounded-full"
-                style={{ background: cat.accent }}
-              />
+            <div className="relative flex items-start justify-between gap-3">
+              <div>
+                <h3 className="text-xl font-bold">{cat.name}</h3>
+                <p className="mt-1 text-sm text-white/60">{cat.description}</p>
+                <span
+                  className="mt-4 inline-block h-1 w-10 rounded-full"
+                  style={{ background: cat.accent }}
+                />
+              </div>
+              <ArrowUpRight className="shrink-0 text-white/40 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white" />
             </div>
           </motion.button>
         ))}

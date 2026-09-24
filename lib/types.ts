@@ -18,7 +18,6 @@ export interface WhatsAppSettings {
 export interface Category {
   id: string;
   name: string;
-  emoji: string;
   image: string;
   accent: string;
   description: string;
@@ -29,7 +28,6 @@ export interface Promotion {
   id: string;
   title: string;
   description: string;
-  emoji: string;
   color: string;
   discount?: number;
   badge?: string;

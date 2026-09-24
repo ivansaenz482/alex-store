@@ -17,7 +17,6 @@ interface Props {
 const empty: Category = {
   id: "",
   name: "",
-  emoji: "🛍️",
   image: "",
   accent: "#39ff14",
   description: "",
@@ -71,8 +70,13 @@ export function CategoryEditor({ categories, onChange, onDeleteProductsFor }: Pr
             layout
             className="flex items-center gap-4 rounded-2xl border border-white/8 bg-white/3 p-4"
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl text-2xl" style={{ background: `${c.accent}22` }}>
-              {c.emoji}
+            <div className="h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-surface-2">
+              {c.image ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={c.image} alt={c.name} className="h-full w-full object-cover" />
+              ) : (
+                <div className="h-full w-full" style={{ background: `${c.accent}33` }} />
+              )}
             </div>
             <div className="min-w-0 flex-1">
               <p className="truncate font-bold">{c.name}</p>
@@ -120,22 +124,13 @@ export function CategoryEditor({ categories, onChange, onDeleteProductsFor }: Pr
             </div>
 
             <div className="space-y-4">
-              <div className="grid grid-cols-[80px_1fr] gap-4">
-                <Field label="Emoji">
-                  <TextInput
-                    value={editing.emoji}
-                    onChange={(e) => setEditing({ ...editing, emoji: e.target.value })}
-                    className="text-center text-xl"
-                  />
-                </Field>
-                <Field label="Nombre">
-                  <TextInput
-                    value={editing.name}
-                    onChange={(e) => setEditing({ ...editing, name: e.target.value })}
-                    placeholder="Camisas de Fútbol"
-                  />
-                </Field>
-              </div>
+              <Field label="Nombre">
+                <TextInput
+                  value={editing.name}
+                  onChange={(e) => setEditing({ ...editing, name: e.target.value })}
+                  placeholder="Camisas de Fútbol"
+                />
+              </Field>
 
               <Field label="Descripción">
                 <TextInput

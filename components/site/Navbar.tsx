@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ShoppingBag } from "lucide-react";
+import { Menu, X, ShoppingBag, MessageCircle } from "lucide-react";
 import { Button } from "./ui";
 import { InstallPwaButton } from "./InstallPwaButton";
 import { useCart } from "./CartContext";
@@ -57,7 +57,7 @@ export function Navbar({
               rel="noreferrer"
             >
               <Button variant="volt" className="px-5 py-2.5 text-xs">
-                📲 Pedir ahora
+                <MessageCircle size={14} /> Pedir ahora
               </Button>
             </a>
           </div>
@@ -113,7 +113,7 @@ export function Navbar({
                 className="mt-2"
               >
                 <Button variant="volt" className="w-full">
-                  📲 Pedir por WhatsApp
+                  <MessageCircle size={16} /> Pedir por WhatsApp
                 </Button>
               </a>
               <InstallPwaButton fullWidth className="mt-2" />

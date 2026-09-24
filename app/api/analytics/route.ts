@@ -72,7 +72,7 @@ export async function GET(request: NextRequest) {
   for (const p of store.products) {
     catTotals[p.categoryId] = (catTotals[p.categoryId] ?? 0) + (productViews[p.id] ?? 0);
     const cat = store.categories.find((c) => c.id === p.categoryId);
-    if (cat) catName[p.categoryId] = cat.emoji + " " + cat.name;
+    if (cat) catName[p.categoryId] = cat.name;
   }
   const topCategories = Object.entries(catTotals)
     .sort((a, b) => b[1] - a[1])

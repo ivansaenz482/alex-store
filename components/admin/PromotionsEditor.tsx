@@ -19,7 +19,6 @@ const empty: Promotion = {
   id: "",
   title: "",
   description: "",
-  emoji: "🎁",
   color: "#39ff14",
   discount: undefined,
   badge: "",
@@ -83,11 +82,13 @@ export function PromotionsEditor({ promotions, categories, onChange }: Props) {
             layout
             className="flex items-center gap-4 rounded-2xl border border-white/8 bg-white/3 p-4"
           >
-            <div
-              className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl text-2xl"
-              style={{ background: `${p.color}22` }}
-            >
-              {p.emoji}
+            <div className="h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-surface-2">
+              {p.image ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={p.image} alt={p.title} className="h-full w-full object-cover" />
+              ) : (
+                <div className="h-full w-full" style={{ background: `${p.color}33` }} />
+              )}
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
@@ -155,22 +156,13 @@ export function PromotionsEditor({ promotions, categories, onChange }: Props) {
             </div>
 
             <div className="space-y-4">
-              <div className="grid grid-cols-[80px_1fr] gap-4">
-                <Field label="Emoji">
-                  <TextInput
-                    value={editing.emoji}
-                    onChange={(e) => setEditing({ ...editing, emoji: e.target.value })}
-                    className="text-center text-xl"
-                  />
-                </Field>
-                <Field label="Título">
-                  <TextInput
-                    value={editing.title}
-                    onChange={(e) => setEditing({ ...editing, title: e.target.value })}
-                    placeholder="Edición Mundial 2026"
-                  />
-                </Field>
-              </div>
+              <Field label="Título">
+                <TextInput
+                  value={editing.title}
+                  onChange={(e) => setEditing({ ...editing, title: e.target.value })}
+                  placeholder="Edición Mundial 2026"
+                />
+              </Field>
 
               <Field label="Descripción">
                 <TextArea

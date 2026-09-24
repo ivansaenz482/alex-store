@@ -126,7 +126,6 @@ export function FeaturedCarousel({
                       <ProductImageCarousel
                         images={p.images}
                         alt={p.name}
-                        emoji={cat?.emoji ?? "🛍️"}
                         aspect="aspect-[4/5]"
                         showControls={false}
                         autoplay={false}

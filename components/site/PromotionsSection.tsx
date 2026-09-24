@@ -75,10 +75,7 @@ export function PromotionsSection({
                         {promo.badge}
                       </span>
                     )}
-                    <div className={promo.image ? "mt-4 text-4xl" : "mt-6 text-6xl"}>
-                      {promo.emoji}
-                    </div>
-                    <h3 className="mt-4 text-2xl font-extrabold">{promo.title}</h3>
+                    <h3 className="mt-5 text-2xl font-extrabold">{promo.title}</h3>
                     <p className="mt-2 max-w-md text-sm text-white/65">
                       {promo.description}
                     </p>

@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
+import { ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ProductImageProps {
   src?: string;
   alt: string;
-  emoji: string;
   className?: string;
   imgClassName?: string;
   fit?: "contain" | "cover";
@@ -14,7 +14,6 @@ interface ProductImageProps {
 export function ProductImage({
   src,
   alt,
-  emoji,
   className,
   imgClassName,
   fit = "contain",
@@ -31,7 +30,12 @@ export function ProductImage({
         )}
       >
         <div className="absolute inset-0 grid-bg opacity-50" />
-        <span className="relative text-6xl opacity-50">{emoji}</span>
+        <ShoppingBag
+          className="relative text-white/25"
+          size={56}
+          strokeWidth={1.4}
+          aria-hidden
+        />
       </div>
     );
   }

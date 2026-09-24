@@ -16,7 +16,7 @@ export function ProductCard({
   index: number;
   onView: () => void;
 }) {
-  const cat = category ?? { emoji: "🛍️", name: "Producto" };
+  const cat = category ?? { name: "Producto" };
   const discount =
     product.originalPrice && product.originalPrice > product.price
       ? Math.round((1 - product.price / product.originalPrice) * 100)
@@ -35,7 +35,6 @@ export function ProductCard({
         <ProductImageCarousel
           images={product.images}
           alt={product.name}
-          emoji={cat.emoji}
           aspect="aspect-[4/5]"
           autoplay={false}
         />
